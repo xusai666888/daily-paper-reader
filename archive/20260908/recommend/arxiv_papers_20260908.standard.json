@@ -1,0 +1,54 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-08T22:52:30.332910+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 1,
+    "deep_cap": 7,
+    "deep_selected": 1,
+    "quick_candidates": 0,
+    "quick_skim_target": 12,
+    "quick_selected": 0
+  },
+  "deep_dive": [
+    {
+      "id": "2609.00272v1",
+      "source": "arxiv",
+      "title": "CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space",
+      "abstract": "Most advances in keypoint descriptions address monomodal settings, where image variations arise from viewpoint, illumination, or contrast changes. Multimodal scenarios involve images produced by fundamentally different sensing processes, such as multispectral imaging, RGB-depth, satellite imagery, or medical imaging, causing the same structures to appear differently. A common solution to cross-modal description is to train descriptors for each modality pair, which requires retraining whenever the modalities change, or to train large models, which incur a significant increase in runtime. Instead, we propose CrossFeat, a framework that enables an existing monomodal descriptor to operate across modalities. Our method learns a crossing function in descriptor space that maps features from one modality to a representation compatible with another. To preserve the structural information captured by the original descriptor, CrossFeat introduces a geometry-appearance disentanglement such that only appearance is altered while the geometric properties are preserved. Experiments across multiple domains and datasets demonstrate improved performance in multimodal matching.",
+      "authors": [
+        "Paul Schneider",
+        "Nazim Haouchine"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-31T19:14:54+00:00",
+      "link": "https://arxiv.org/pdf/2609.00272v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "learns a crossing function in descriptor space to enable existing monomodal descriptors to operate across imaging modalities",
+      "llm_evidence_cn": "学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作",
+      "llm_evidence": "学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作",
+      "canonical_evidence": "学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作",
+      "llm_tldr_en": "CrossFeat enables monomodal keypoint descriptors to work across different imaging modalities by learning a crossing function in descriptor space, avoiding pairwise retraining.",
+      "llm_tldr_cn": "针对跨模态图像描述需要为每对模态重新训练描述子或使用大模型导致效率低的问题，提出CrossFeat框架，在描述子空间中学习跨模态变换函数。该方法使现有单模态描述子能够直接应用于多光谱、RGB-D、卫星和医学图像等不同传感模态。实验表明CrossFeat在无需重新训练的情况下有效桥接模态差异，并保持较低运行开销。该工作为跨模态特征对齐提供了通用且高效的方案，可迁移至可见光-红外行人重识别等任务。",
+      "llm_tldr": "针对跨模态图像描述需要为每对模态重新训练描述子或使用大模型导致效率低的问题，提出CrossFeat框架，在描述子空间中学习跨模态变换函数。该方法使现有单模态描述子能够直接应用于多光谱、RGB-D、卫星和医学图像等不同传感模态。实验表明CrossFeat在无需重新训练的情况下有效桥接模态差异，并保持较低运行开销。该工作为跨模态特征对齐提供了通用且高效的方案，可迁移至可见光-红外行人重识别等任务。",
+      "llm_tags": [
+        "query:vi-reid"
+      ],
+      "matched_query_tag": "query:vi-reid",
+      "matched_query_text": "aligning feature distributions across heterogeneous modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": []
+}

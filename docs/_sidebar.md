@@ -1,6 +1,9 @@
 * <a class="dpr-sidebar-root-link" href="#/">首页</a>
 * <a class="dpr-sidebar-root-link dpr-sidebar-noactive-link" href="javascript:void(0)" data-dpr-hash="#/tutorial/README">使用教程</a>
 * Daily Papers
+  * 2026-09-08 <!--dpr-date:20260908-->
+    * 精读区
+      * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/202609/08/2609.00272v1-crossfeat-bridging-imaging-modalities-in-feature-descriptor-space" data-sidebar-item="{&quot;title&quot;: &quot;CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2609.00272v1-crossfeat-bridging-imaging-modalities-in-feature-descriptor-space&quot;, &quot;score&quot;: &quot;8.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;vi-reid&quot;}], &quot;evidence&quot;: &quot;学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作&quot;}">CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space</a>
   * 2026-08-10 ~ 2026-09-08 <!--dpr-date:20260810-20260908-->
     * 速读区
       * <a class="dpr-sidebar-item-link dpr-sidebar-item-structured" href="#/20260810-20260908/2608.16015v1-multi-scale-decomposed-convolution-refinement-network-for-visible-infrared-person-re-identification" data-sidebar-item="{&quot;title&quot;: &quot;Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification&quot;, &quot;link&quot;: &quot;https://arxiv.org/abs/2608.16015v1-multi-scale-decomposed-convolution-refinement-network-for-visible-infrared-person-re-identification&quot;, &quot;score&quot;: &quot;10.0&quot;, &quot;tags&quot;: [{&quot;kind&quot;: &quot;query&quot;, &quot;label&quot;: &quot;vi-reid&quot;}], &quot;evidence&quot;: &quot;面向可见光-红外行人重识别的跨模态特征学习&quot;}">Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification</a>

@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-08",
+  "date": "2026-09-08",
+  "generated_at": "2026-09-08T22:54:58",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/08/2609.00272v1-crossfeat-bridging-imaging-modalities-in-feature-descriptor-space",
+      "section": "deep",
+      "title_en": "CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space",
+      "authors": "Paul Schneider, Nazim Haouchine",
+      "date": "2026-08-31",
+      "pdf": "https://arxiv.org/pdf/2609.00272v1",
+      "score": "8.0",
+      "evidence": "学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作",
+      "tldr": "多模态图像由不同传感过程产生，相同结构呈现迥异外观，导致跨模态描述困难。现有方案要么为每对模态训练专用描述符，要么使用大模型，前者缺乏泛化，后者计算开销高。CrossFeat提出在描述符空间学习交叉函数，将单模态描述符映射到另一模态兼容表示，并通过几何与外观解耦，仅调整外观、保留几何结构。实验覆盖多光谱、RGB深度、卫星影像和医学图像等多个领域，结果表明CrossFeat显著提升多模态匹配性能，无需为每对模态重新训练。",
+      "tags": "query:vi-reid",
+      "abstract_en": "Most advances in keypoint descriptions address monomodal settings, where image variations arise from viewpoint, illumination, or contrast changes. Multimodal scenarios involve images produced by fundamentally different sensing processes, such as multispectral imaging, RGB-depth, satellite imagery, or medical imaging, causing the same structures to appear differently. A common solution to cross-modal description is to train descriptors for each modality pair, which requires retraining whenever the modalities change, or to train large models, which incur a significant increase in runtime. Instead, we propose CrossFeat, a framework that enables an existing monomodal descriptor to operate across modalities. Our method learns a crossing function in descriptor space that maps features from one modality to a representation compatible with another. To preserve the structural information captured by the original descriptor, CrossFeat introduces a geometry-appearance disentanglement such that only appearance is altered while the geometric properties are preserved. Experiments across multiple domains and datasets demonstrate improved performance in multimodal matching.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

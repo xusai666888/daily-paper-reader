@@ -1,0 +1,25 @@
+{
+  "date": "20260908",
+  "date_label": "",
+  "generated_at": "2026-09-08 22:54:46 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.00272v1",
+      "route": "202609/08/2609.00272v1-crossfeat-bridging-imaging-modalities-in-feature-descriptor-space",
+      "title": "CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "学习描述子空间中的跨模态变换函数，使单模态描述子能跨成像模态工作",
+      "first_seen_at": "2026-09-08 22:54:46 UTC",
+      "updated_at": "2026-09-08 22:54:46 UTC"
+    }
+  ]
+}
