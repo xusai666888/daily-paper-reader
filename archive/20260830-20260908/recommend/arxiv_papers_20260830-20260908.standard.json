@@ -1,16 +1,94 @@
 {
   "mode": "standard",
-  "generated_at": "2026-09-08T10:06:55.365884+00:00",
+  "generated_at": "2026-09-08T10:30:36.164155+00:00",
   "stats": {
     "mode": "standard",
-    "tag_count": 0,
+    "tag_count": 1,
     "deep_divecandidates": 0,
-    "deep_cap": null,
+    "deep_cap": 6,
     "deep_selected": 0,
-    "quick_candidates": 0,
-    "quick_skim_target": 10,
-    "quick_selected": 0
+    "quick_candidates": 2,
+    "quick_skim_target": 11,
+    "quick_selected": 2
   },
   "deep_dive": [],
-  "quick_skim": []
+  "quick_skim": [
+    {
+      "id": "2608.29917v1",
+      "source": "arxiv",
+      "title": "FoundYou: A Unified Model for Personalized Segmentation and Retrieval",
+      "abstract": "Personalized segmentation and personalized retrieval both aim to identify the same physical object across different images. While the former localizes the object within a target image, the latter retrieves images where it appears. Despite this shared instance-level objective, the two tasks have largely evolved separately and are addressed with distinct solutions. In this work, we introduce FoundYou, a unified framework built on the observation that Segment Anything 2 (SAM 2), trained to preserve object identity across video frames, inherently captures instance-level cues. We leverage this property to match objects across independent images, enabling segmentation and retrieval to emerge as two outcomes of the same instance alignment process. This unified view unlocks new capabilities beyond traditional benchmarks, including few-shot personalized retrieval and promptable personalized segmentation with flexible prompts. Extensive experiments show consistent gains over unified and task-specific methods, including +18.4 mIoU on PerMIS and +17.8 mAP on ILIAS. Performance scales with additional references and remains robust to weaker prompts. Beyond personalization, FoundYou achieves state-of-the-art results on category-level retrieval benchmarks. Notably, our approach keeps the SAM 2-small model entirely frozen and adds only 5.9 M trainable parameters, yielding a 52 M-parameter model that is over 75x faster and 20x smaller than the only prior unified solution. Code is available at https://github.com/ga1i13o/FoundYou .",
+      "authors": [
+        "Gabriele Trivigno",
+        "Marcos Alfaro",
+        "Claudia Cuttano",
+        "Gabriele Berton",
+        "Luis Payá",
+        "Carlo Masone"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-30T17:19:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.29917v1",
+      "tags": [
+        "keyword:person-reid",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified framework for personalized retrieval of the same physical object across images, applicable to person identity matching",
+      "llm_evidence_cn": "跨图像检索同一物理对象的统一框架，可应用于行人身份匹配",
+      "llm_evidence": "跨图像检索同一物理对象的统一框架，可应用于行人身份匹配",
+      "canonical_evidence": "跨图像检索同一物理对象的统一框架，可应用于行人身份匹配",
+      "llm_tldr_en": "Personalized segmentation and retrieval share an instance-level goal but remain separate. FoundYou leverages SAM2's video identity preservation to unify both tasks via instance alignment across images, showing strong matching performance and potential for person re-identification.",
+      "llm_tldr_cn": "个性化分割与个性化检索虽共享实例级目标，却因任务定义不同而长期分离。本文提出 FoundYou 统一模型，其关键在于利用 SAM2 在视频帧间保持对象身份的内在能力，将跨图像实例对齐作为分割与检索的共同输出。作者在多个数据集上进行实验，验证了该框架能够有效匹配独立图像中的同一物理对象，实现了分割与检索性能的同步提升。该工作不仅统一了两个任务，还展示了视频身份先验在跨图像实例匹配中的巨大潜力，为行人重识别等场景下的实例检索提供了新的方法思路。",
+      "llm_tldr": "个性化分割与个性化检索虽共享实例级目标，却因任务定义不同而长期分离。本文提出 FoundYou 统一模型，其关键在于利用 SAM2 在视频帧间保持对象身份的内在能力，将跨图像实例对齐作为分割与检索的共同输出。作者在多个数据集上进行实验，验证了该框架能够有效匹配独立图像中的同一物理对象，实现了分割与检索性能的同步提升。该工作不仅统一了两个任务，还展示了视频身份先验在跨图像实例匹配中的巨大潜力，为行人重识别等场景下的实例检索提供了新的方法思路。",
+      "llm_tags": [
+        "query:person-reid"
+      ],
+      "matched_query_tag": "query:person-reid",
+      "matched_query_text": "cross-camera retrieval of person identities",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01787v1",
+      "source": "arxiv",
+      "title": "CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer",
+      "abstract": "Vision Transformers (ViT) excel in semantic understanding but fail to discriminate between object instances (e.g., identical embeddings for two dogs), limiting their use in instance-level tasks such as object detection and instance segmentation. We propose Contrastive Vision Transformer (CoViT), a self-supervised learning framework that injects instance-awareness into ViT through geometry-guided contrastive learning. CoViT uniquely coordinates ViT's attention maps and embeddings by constructing triplets: (1) Attention-guided masking: Refine multi-head attention via adaptive thresholding and morphological operations to generate instance masks, identifying foreground anchors; (2) Hardest contrastive mining: For each anchor, computing pairwise embedding similarities to select the intra-instance hardest positive (least similar patch within its mask) and inter-instance hardest negative (most similar patch from other instances), with intra-instance regions masked during negative search. These triplets drive a contrastive loss that simultaneously compresses intra-instance variance and expands inter-instance margins, forcing ViT to discern subtle geometric and appearance differences between instances. CoViT consistently achieves stable performance gains of over 2 AP points across multiple instance-level perception tasks by using ViT as backbone architecture. Notably, CoViT requires no extra decoders or labels, demonstrating that a pure ViT can learn instance-aware representations via inherent attention priors and targeted contrastive constraints. Code and models will be released.",
+      "authors": [
+        "Yisen Wang",
+        "Zhirong Wu",
+        "Limin Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T18:59:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.01787v1",
+      "tags": [
+        "keyword:person-reid",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-supervised instance-awareness for ViT, relevant to person re-id feature learning",
+      "llm_evidence_cn": "为 ViT 注入实例感知的自监督方法，与行人重识别特征学习相关",
+      "llm_evidence": "为 ViT 注入实例感知的自监督方法，与行人重识别特征学习相关",
+      "canonical_evidence": "为 ViT 注入实例感知的自监督方法，与行人重识别特征学习相关",
+      "llm_tldr_en": "ViTs lack instance discrimination. CoViT introduces geometry-guided contrastive learning with attention masking and hardest mining to inject instance awareness, improving instance-level tasks like detection and segmentation, and offering a pre-training strategy useful for person re-identification.",
+      "llm_tldr_cn": "视觉 Transformer 在语义理解上表现优异，但难以区分不同实例。本文提出 CoViT，一种自监督对比学习框架，通过几何引导的注意力掩码和最难对比挖掘，为 ViT 注入实例感知能力。实验表明，CoViT 能有效提升 ViT 在目标检测和实例分割等实例级任务中的表现。该方法提供了一种增强实例判别特征的学习途径，对行人重识别等需要精细身份区分的任务具有重要借鉴价值。",
+      "llm_tldr": "视觉 Transformer 在语义理解上表现优异，但难以区分不同实例。本文提出 CoViT，一种自监督对比学习框架，通过几何引导的注意力掩码和最难对比挖掘，为 ViT 注入实例感知能力。实验表明，CoViT 能有效提升 ViT 在目标检测和实例分割等实例级任务中的表现。该方法提供了一种增强实例判别特征的学习途径，对行人重识别等需要精细身份区分的任务具有重要借鉴价值。",
+      "llm_tags": [
+        "query:person-reid"
+      ],
+      "matched_query_tag": "query:person-reid",
+      "matched_query_text": "transformer and attention models for person re-identification",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
 }
