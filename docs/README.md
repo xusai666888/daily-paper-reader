@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-30 ~ 2026-09-08</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-10 ~ 2026-09-08</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
-    <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>3 次</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-08 10:57:34 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-08 11:28:22 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -70,7 +70,7 @@
   </div>
   <div class="dpr-home-dashboard-body">
 <p>今日共生成 3 篇推荐（精读 0 篇，速读 3 篇）</p>
-<p>速读：《ViTAMINS: An Empirical Study of Training Self-Supervised Vision Transformers with Synthetic Hard Negatives》（7.0/10）, 《FoundYou: A Unified Model for Personalized Segmentation and Retrieval》（6.0/10）, 《CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer》（6.0/10）</p>
+<p>速读：《Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification》（10.0/10）, 《Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification》（9.0/10）, 《MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering》（8.0/10）</p>
 <p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
   </div>
 </section>
@@ -96,9 +96,9 @@
     <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ViTAMINS: An Empirical Study of Training Self-Supervised Vision Transformers with Synthetic Hard Negatives">ViTAMINS: An Empirical Study of Training Self-Supervised Vision Transformers with Synthetic Hard Negatives</span></li><li><span class="dpr-home-dashboard-paper-title" title="FoundYou: A Unified Model for Personalized Segmentation and Retrieval">FoundYou: A Unified Model for Personalized Segmentation and Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer">CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification">Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification</span></li><li><span class="dpr-home-dashboard-paper-title" title="Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification">Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification</span></li><li><span class="dpr-home-dashboard-paper-title" title="MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering">MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">person-reid <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">vi-reid <strong>3</strong></span></div>
 </section>
 </div>
 

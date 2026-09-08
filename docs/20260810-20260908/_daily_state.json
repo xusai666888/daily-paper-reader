@@ -1,0 +1,57 @@
+{
+  "date": "20260810-20260908",
+  "date_label": "2026-08-10 ~ 2026-09-08",
+  "generated_at": "2026-09-08 11:28:22 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.16015v1",
+      "route": "20260810-20260908/2608.16015v1-multi-scale-decomposed-convolution-refinement-network-for-visible-infrared-person-re-identification",
+      "title": "Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "面向可见光-红外行人重识别的跨模态特征学习",
+      "first_seen_at": "2026-09-08 11:28:22 UTC",
+      "updated_at": "2026-09-08 11:28:22 UTC"
+    },
+    {
+      "paper_id": "2608.13092v1",
+      "route": "20260810-20260908/2608.13092v1-paths-prompt-aware-spatio-temporal-transformer-with-hierarchical-multi-modal-fusion-for-rgb-event-video-person-re-identification",
+      "title": "Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "RGB-事件视频行人重识别，采用分层多模态融合处理异构模态",
+      "first_seen_at": "2026-09-08 11:28:22 UTC",
+      "updated_at": "2026-09-08 11:28:22 UTC"
+    },
+    {
+      "paper_id": "2608.15096v1",
+      "route": "20260810-20260908/2608.15096v1-modal-multi-modal-object-re-id-via-model-driven-sparse-decoupling-and-text-image-differential-filtering",
+      "title": "MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "使用RGB、近红外、热红外和文本模态的多模态目标重识别",
+      "first_seen_at": "2026-09-08 11:28:22 UTC",
+      "updated_at": "2026-09-08 11:28:22 UTC"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "label": "2026-08-10 ~ 2026-09-08",
+  "date": "2026-08-10 ~ 2026-09-08",
+  "generated_at": "2026-09-08T11:28:38",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "20260810-20260908/2608.16015v1-multi-scale-decomposed-convolution-refinement-network-for-visible-infrared-person-re-identification",
+      "section": "quick",
+      "title_en": "Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification",
+      "authors": "Mingsheng Zheng, Zirui Jiang, Bo Liu, Yupeng Chen, Jun Zhang, Kai Zhao",
+      "date": "2026-08-17",
+      "pdf": "https://arxiv.org/pdf/2608.16015v1",
+      "score": "10.0",
+      "evidence": "面向可见光-红外行人重识别的跨模态特征学习",
+      "tldr": "可见光-红外行人重识别受跨模态差异和判别能力不足困扰，现有方法在语义挖掘、跨模态融合与特征约束上存在局限。本文提出多尺度分解卷积细化网络MDCRNet，通过层次学习模块捕获多尺度空间依赖，并设计联合判别度量损失同时优化模态内紧凑性与模态间可分性。在SYSU-MM01和RegDB数据集上的实验表明该网络达到当前最优性能，显著提升识别效果。",
+      "tags": "query:vi-reid",
+      "abstract_en": "Visible-infrared person re-identification (VI-ReID) suffers from cross-modal discrepancies and limited discriminative capabilities, leading to suboptimal recognition performance. Current approaches exhibit limitations in semantic mining, cross-modal fusion and feature constraints. To tackle these challenges, we propose MDCRNet, a Multi-scale Decomposed Convolution Refinement Network that enhances cross-modal feature learning and discriminative metric learning. Specifically, we introduce a Hierarchical Learning Module (HLM) containing four Hierarchical Decomposed Convolution Attention (HDCA) modules, each equipped with lightweight channel attention and multi-scale spatial perception blocks to capture multi-scale spatial dependencies. Moreover, we develop a Joint Discriminative Metric Loss (JDML) incorporating a novel Granularity Discriminative Loss (GDL) that simultaneously optimizes intra-identity compactness and inter-identity separability across modalities. Extensive experiments on SYSU-MM01 and RegDB datasets demonstrate that MDCRNet achieves state-of-the-art performance on both benchmarks. Code is available at https://github.com/Kevin-zms/MDCRNet.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "20260810-20260908/2608.13092v1-paths-prompt-aware-spatio-temporal-transformer-with-hierarchical-multi-modal-fusion-for-rgb-event-video-person-re-identification",
+      "section": "quick",
+      "title_en": "Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification",
+      "authors": "Yakun Huo, Yingquan Wang, Yangyang Liu, Tianyu Yan, Yunzhi Zhuge, Pingping Zhang, Huchuan Lu",
+      "date": "2026-08-13",
+      "pdf": "https://arxiv.org/pdf/2608.13092v1",
+      "score": "9.0",
+      "evidence": "RGB-事件视频行人重识别，采用分层多模态融合处理异构模态",
+      "tldr": "现有 RGB-Event 视频行人重识别方法时空建模解耦、融合粒度粗，难以捕获细粒度判别线索。本文提出 Paths 框架，设计记忆增强骨干、提示感知时空 Transformer 和层次多模态融合，在统一 Transformer 中联合建模时空并分层融合多模态特征。在 EvReID、MARS 和 iLIDS-VID 上实验验证有效，取得先进性能。该工作为 RE-VReID 提供了统一时空建模与细粒度融合的新方案。",
+      "tags": "query:vi-reid",
+      "abstract_en": "RGB-Event Video Person Re-Identification (RE-VReID) aims to retrieve specific person across non-overlapping cameras with complementary RGB videos and event streams. However, existing methods often decouple spatial and temporal modeling, which limits their interaction. In addition, global-level RGB-Event fusion fails to fully exploit fine-grained discriminative cues. To address these issues, we propose Paths, a unified framework with spatio-temporal modeling and hierarchical multi-modal fusion for RE-VReID. Specifically, we first design a Memory-Augmented Backbone (MAB) to maintain modality-specific identity prototypes for stable intra-modal representation learning. Then, we propose a Prompt-aware Spatio-temporal Transformer (PST) to jointly model spatial and temporal cues within a unified Transformer. Finally, we introduce a Hierarchical Multi-modal Fusion (HMF) to integrate RGB and event features at global and local levels. With these modules, our framework can learn robust and discriminative representations for RE-VReID. Extensive experiments on three public RE-VReID benchmarks including EvReID, MARS and iLIDS-VID, demonstrate the effectiveness of our proposed method. The code is available at https://github.com/Reflection0427/Paths.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "20260810-20260908/2608.15096v1-modal-multi-modal-object-re-id-via-model-driven-sparse-decoupling-and-text-image-differential-filtering",
+      "section": "quick",
+      "title_en": "MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering",
+      "authors": "Chengbo Huang, Jun-Jie Huang, Long Lan, Tianrui Liu, Xueqiong Li, Yuanxi Peng, Xinwang Liu, Meng Wang",
+      "date": "2026-08-15",
+      "pdf": "https://arxiv.org/pdf/2608.15096v1",
+      "score": "8.0",
+      "evidence": "使用RGB、近红外、热红外和文本模态的多模态目标重识别",
+      "tldr": "多模态目标重识别现有方法缺乏原则性特征解耦与一致性整合，导致跨模态冲突、判别线索模糊及模态缺失性能下降。MODAL基于耦合稀疏编码理论，通过模型驱动深度展开实现多模态特征稀疏解耦，显式分解为单模态特定、双模态和三模态共享表示。同时提出文本-图像差分过滤模块，利用粗粒度文本语义抑制任务无关响应。在四个数据集上达到最优性能，并具有更优的透明性与鲁棒性。",
+      "tags": "query:vi-reid",
+      "abstract_en": "Multi-modal object re-identification (Re-ID) aims to facilitate cross-camera object retrieval in complex environments by leveraging complementary information from visual (e.g., RGB, NIR, TIR) and textual modalities. However, existing approaches often lack principled feature disentanglement and coherent multi-modal integration, leading to entangled representations that introduce cross-modal conflicts, obscure discriminative cues, and suffer distribution shift under modality-missing conditions. To tackle these challenges, we propose MODAL, a novel multi-modal object re-identification framework, grounded in coupled sparse coding theory and differential suppression principles. A core component of MODAL is a Multi-modal Feature Sparse Decoupling module, developed in a model-driven deep unrolling manner based on multi-modal coupled sparse coding. It explicitly decomposes multi-modal features into uni-modal specific, bi-modal and tri-modal shared representations, thereby achieving more transparent and effective feature disentanglement. Benefiting from the principled feature disentanglement, MODAL naturally mitigates performance degradation in incomplete-modality scenarios via a Modality-Aware Subspace Activation that selectively activates only the consistently shared subspaces. Moreover, we propose a Text-Image Differential Filtering module that leverages coarse-grained textual semantics to adaptively suppress task-irrelevant responses in the decoupled visual representations, thereby enhancing discriminative information. Extensive experiments on four datasets demonstrate that MODAL achieves state-of-the-art performance with superior transparency.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
