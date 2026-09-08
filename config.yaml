@@ -61,6 +61,53 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-09-08T11:03:00.693Z'
+    - tag: VI-ReID
+      description: 查询行人重识别中跨模态图像融合相关论文，重点包括可见光-红外融合、模态对齐、特征融合等方法，以提高跨模态人物识别与融合性能。
+      enabled: true
+      paper_sources:
+        - arxiv
+        - biorxiv
+      keywords:
+        - keyword: visible-infrared person re-identification
+          keyword_cn: 可见光-红外行人重识别
+          query: methods for matching pedestrians across visible and infrared camera modalities
+        - keyword: cross-modal image fusion
+          keyword_cn: 跨模态图像融合
+          query: techniques for fusing features from different image modalities
+        - keyword: modality alignment
+          keyword_cn: 模态对齐
+          query: aligning feature distributions across heterogeneous modalities
+        - keyword: feature fusion
+          keyword_cn: 特征融合
+          query: combining features from multiple modalities for stronger representations
+        - keyword: cross-modal matching
+          keyword_cn: 跨模态匹配
+          query: matching identities across different sensing modalities
+        - keyword: heterogeneous person re-identification
+          keyword_cn: 异构行人重识别
+          query: person re-identification under different camera spectral bands
+      intent_queries:
+        - query: cross modal image fusion techniques for person re identification
+          query_cn: 用于行人重识别的跨模态图像融合技术
+          enabled: true
+          source: manual
+          note: ''
+        - query: visible infrared person re identification feature fusion methods
+          query_cn: 可见光 红外行人重识别特征融合方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: improving cross modal person recognition with modality alignment
+          query_cn: 通过模态对齐提高跨模态人物识别
+          enabled: true
+          source: manual
+          note: ''
+        - query: deep learning methods for heterogeneous person re identification
+          query_cn: 异构行人重识别的深度学习方法
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-09-08T11:12:16.388Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
