@@ -1,0 +1,89 @@
+{
+  "date": "20260909",
+  "date_label": "",
+  "generated_at": "2026-09-09 21:33:01 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.03516v1",
+      "route": "202609/09/2609.03516v1-residual-optimal-transport-based-experts-collaboration-towards-modality-aware-infrared-visible-object-detection",
+      "title": "Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出通过最优传输对齐实现红外与可见光模态的跨模态融合",
+      "first_seen_at": "2026-09-09 21:33:01 UTC",
+      "updated_at": "2026-09-09 21:33:01 UTC"
+    },
+    {
+      "paper_id": "2609.01787v1",
+      "route": "202609/09/2609.01787v1-covit-instance-correspondence-contrastive-learning-for-vision-transformer",
+      "title": "CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "自监督对比学习用于实例级判别，可支持行人身份嵌入",
+      "first_seen_at": "2026-09-09 21:33:01 UTC",
+      "updated_at": "2026-09-09 21:33:01 UTC"
+    },
+    {
+      "paper_id": "2609.01963v1",
+      "route": "202609/09/2609.01963v1-aggregating-neighbor-embedding-projection-and-rank-based-manifold-learning-for-image-retrieval",
+      "title": "Aggregating Neighbor Embedding Projection and Rank-Based Manifold Learning for Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过流形学习改进图像检索排序，可应用于行人图库检索",
+      "first_seen_at": "2026-09-09 21:33:01 UTC",
+      "updated_at": "2026-09-09 21:33:01 UTC"
+    },
+    {
+      "paper_id": "2609.04348v1",
+      "route": "202609/09/2609.04348v1-object-concepts-emerge-from-motion",
+      "title": "Object Concepts Emerge from Motion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过像素级成对度量学习从原始视频学习保持个体实例身份的对象中心表示",
+      "first_seen_at": "2026-09-09 21:33:01 UTC",
+      "updated_at": "2026-09-09 21:33:01 UTC"
+    },
+    {
+      "paper_id": "2609.06343v1",
+      "route": "202609/09/2609.06343v1-radiation-rotation-and-scale-invariant-feature-descriptor-for-multimodal-image-matching",
+      "title": "Radiation, Rotation and Scale Invariant Feature Descriptor for Multimodal Image Matching",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提出用于多模态图像匹配的辐射、旋转和尺度不变特征描述子，联合编码几何与辐射关系",
+      "first_seen_at": "2026-09-09 21:33:01 UTC",
+      "updated_at": "2026-09-09 21:33:01 UTC"
+    }
+  ]
+}

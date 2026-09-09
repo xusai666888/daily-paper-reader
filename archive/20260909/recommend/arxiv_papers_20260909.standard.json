@@ -1,0 +1,225 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-09T21:30:11.802728+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 5,
+    "quick_skim_target": 12,
+    "quick_selected": 5
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.03516v1",
+      "source": "arxiv",
+      "title": "Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection",
+      "abstract": "Infrared-visible object detection (IVOD) integrates complementary evidence from visible and infrared sensors for reliable perception in challenging scenes. In practice, sensors may fail or drop frames, leaving one modality unavailable or intermittent. Existing methods for IVOD assume both modalities are always present, and fixed fusion collapses when one stream is missing. Furthermore, it remains a critical challenge to reliably estimate semantic correlation across heterogeneous modalities, especially under spectral distribution discrepancy. We present FlexibleFusion, a unified and adaptive method that flexibly allocates integration pathways and fusion strength, operating seamlessly across complete and missing-modality regimes. At its core, the Modality-Aware Experts Collaboration (MAEC) mechanism selectively activates and aggregates cross-modal or intra-modal expert pathways. It allows cross-modal fusion when full modalities are available and falls back to self-fusion under missing conditions. Additionally, we design Residual Self-Paced Entropic Optimal Transport (RSPEOT) to align heterogeneous feature distributions from a transport perspective. Instead of relying on the fixed sparsity coefficient in standard entropic optimal transport (EOT), RSPEOT introduces a residual-driven self-paced update that prioritizes reliable matches and progressively refines harder ones. This design alleviates the additional optimization burden of standard EOT while preserving reliable semantic alignment. Comprehensive experiments under complete and missing-modality protocols show consistent performance across arbitrary modality configurations. Code will be released upon publication.",
+      "authors": [
+        "Yue Zhao",
+        "Hua Yu",
+        "Yukun Zhao",
+        "Yuzhi Zhang",
+        "Maoguo Gong",
+        "Xin Mei",
+        "Zhuping Hu",
+        "Yanchi Li",
+        "A. K. Qin"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-03T08:17:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.03516v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Proposes cross-modal fusion of infrared and visible modalities with optimal transport alignment",
+      "llm_evidence_cn": "提出通过最优传输对齐实现红外与可见光模态的跨模态融合",
+      "llm_evidence": "提出通过最优传输对齐实现红外与可见光模态的跨模态融合",
+      "canonical_evidence": "提出通过最优传输对齐实现红外与可见光模态的跨模态融合",
+      "llm_tldr_en": "Addresses infrared-visible object detection with missing modalities; proposes FlexibleFusion using residual optimal transport for adaptive cross-modal alignment and fusion, improving robustness and semantic correlation.",
+      "llm_tldr_cn": "针对红外-可见光目标检测中模态缺失与光谱分布差异问题，提出基于残差最优传输的专家协作方法，自适应分配融合路径与强度，统一处理完整与缺失模态场景。实验表明该方法在跨模态检测中提升了语义关联估计与鲁棒性，其融合思路可迁移至可见光-红外行人重识别。",
+      "llm_tldr": "针对红外-可见光目标检测中模态缺失与光谱分布差异问题，提出基于残差最优传输的专家协作方法，自适应分配融合路径与强度，统一处理完整与缺失模态场景。实验表明该方法在跨模态检测中提升了语义关联估计与鲁棒性，其融合思路可迁移至可见光-红外行人重识别。",
+      "llm_tags": [
+        "query:vi-reid"
+      ],
+      "matched_query_tag": "query:vi-reid",
+      "matched_query_text": "techniques for fusing features from different image modalities",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.01787v1",
+      "source": "arxiv",
+      "title": "CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer",
+      "abstract": "Vision Transformers (ViT) excel in semantic understanding but fail to discriminate between object instances (e.g., identical embeddings for two dogs), limiting their use in instance-level tasks such as object detection and instance segmentation. We propose Contrastive Vision Transformer (CoViT), a self-supervised learning framework that injects instance-awareness into ViT through geometry-guided contrastive learning. CoViT uniquely coordinates ViT's attention maps and embeddings by constructing triplets: (1) Attention-guided masking: Refine multi-head attention via adaptive thresholding and morphological operations to generate instance masks, identifying foreground anchors; (2) Hardest contrastive mining: For each anchor, computing pairwise embedding similarities to select the intra-instance hardest positive (least similar patch within its mask) and inter-instance hardest negative (most similar patch from other instances), with intra-instance regions masked during negative search. These triplets drive a contrastive loss that simultaneously compresses intra-instance variance and expands inter-instance margins, forcing ViT to discern subtle geometric and appearance differences between instances. CoViT consistently achieves stable performance gains of over 2 AP points across multiple instance-level perception tasks by using ViT as backbone architecture. Notably, CoViT requires no extra decoders or labels, demonstrating that a pure ViT can learn instance-aware representations via inherent attention priors and targeted contrastive constraints. Code and models will be released.",
+      "authors": [
+        "Yisen Wang",
+        "Zhirong Wu",
+        "Limin Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T18:59:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.01787v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "self-supervised contrastive learning for instance-level discrimination, useful for pedestrian identity embeddings",
+      "llm_evidence_cn": "自监督对比学习用于实例级判别，可支持行人身份嵌入",
+      "llm_evidence": "自监督对比学习用于实例级判别，可支持行人身份嵌入",
+      "canonical_evidence": "自监督对比学习用于实例级判别，可支持行人身份嵌入",
+      "llm_tldr_en": "Proposes CoViT, a self-supervised framework that injects instance-awareness into Vision Transformers via geometry-guided contrastive learning, improving instance-level discrimination for tasks like person re-identification.",
+      "llm_tldr_cn": "视觉Transformer擅长语义理解，但难以区分同一类别的不同实例，限制了其在实例级任务中的应用。本文提出CoViT框架，通过注意力引导掩码构建实例级三元组，并采用最难对比挖掘进行几何引导的自监督学习，将实例感知能力注入ViT。实验结果表明，该方法能显著改善实例级表征的判别性，为行人身份匹配等任务提供了有效的表示学习方法。",
+      "llm_tldr": "视觉Transformer擅长语义理解，但难以区分同一类别的不同实例，限制了其在实例级任务中的应用。本文提出CoViT框架，通过注意力引导掩码构建实例级三元组，并采用最难对比挖掘进行几何引导的自监督学习，将实例感知能力注入ViT。实验结果表明，该方法能显著改善实例级表征的判别性，为行人身份匹配等任务提供了有效的表示学习方法。",
+      "llm_tags": [
+        "query:person-reid"
+      ],
+      "matched_query_tag": "query:person-reid",
+      "matched_query_text": "Learning robust appearance representations for pedestrian identity matching",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01963v1",
+      "source": "arxiv",
+      "title": "Aggregating Neighbor Embedding Projection and Rank-Based Manifold Learning for Image Retrieval",
+      "abstract": "Content-based image retrieval (CBIR) has advanced significantly with deep learning, yet effectively ranking similar images remains challenging, particularly in high-dimensional feature spaces, where pairwise distances often fail to capture contextual relationships and the semantic gap between visual features and high-level concepts persists. Manifold learning and rank-based refinement methods have emerged as complementary strategies, respectively improving feature representations and exploiting contextual information embedded in ranked lists, such as neighborhood relationships among images. However, combining these projection-based and rank-based strategies to exploit their complementary properties remains a challenging research problem. To address this, we propose a framework that combines neighbor embedding projections with rank-based manifold learning through rank aggregation. Uniform Manifold Approximation and Projection (UMAP) generates alternative low-dimensional feature representations, and ranked lists obtained from UMAP projections and rank-based re-ranking methods are combined using the Borda Count aggregation strategy. Experiments were conducted on several public datasets using deep learning features extracted from ResNet152, Swin Transformer, and DINOv2 models. Results show that the proposed approach improves retrieval effectiveness in several scenarios, particularly when the baseline representation struggles to achieve high precision. The aggregation strategy also often improves the quality of top-ranked positions, leading to competitive Mean Average Precision (MAP) and Precision values across different datasets and feature extractors. These findings suggest that combining projection-based and rank-based manifold learning strategies through rank aggregation can provide complementary contextual information for image retrieval tasks.",
+      "authors": [
+        "Vinicius Atsushi Sato Kawai",
+        "Gustavo Rosseto Leticio",
+        "Lucas Pascotti Valem",
+        "Daniel Carlos Guimarães Pedronette"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T00:43:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.01963v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Improves image retrieval ranking via manifold learning, applicable to pedestrian gallery retrieval",
+      "llm_evidence_cn": "通过流形学习改进图像检索排序，可应用于行人图库检索",
+      "llm_evidence": "通过流形学习改进图像检索排序，可应用于行人图库检索",
+      "canonical_evidence": "通过流形学习改进图像检索排序，可应用于行人图库检索",
+      "llm_tldr_en": "Proposes combining neighbor embedding projection and rank-based manifold learning to improve CBIR ranking, which can benefit person re-identification retrieval tasks.",
+      "llm_tldr_cn": "该论文针对图像检索中高维特征空间排序难、语义鸿沟问题，提出融合邻居嵌入投影与基于排序的流形学习方法，利用投影改进特征表示并利用排序上下文信息。实验表明该方法能提升检索性能，对行人重识别中的图库检索具有潜在应用价值。",
+      "llm_tldr": "该论文针对图像检索中高维特征空间排序难、语义鸿沟问题，提出融合邻居嵌入投影与基于排序的流形学习方法，利用投影改进特征表示并利用排序上下文信息。实验表明该方法能提升检索性能，对行人重识别中的图库检索具有潜在应用价值。",
+      "llm_tags": [
+        "query:person-reid"
+      ],
+      "matched_query_tag": "query:person-reid",
+      "matched_query_text": "retrieving gallery images of the same pedestrian",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.04348v1",
+      "source": "arxiv",
+      "title": "Object Concepts Emerge from Motion",
+      "abstract": "Object-centric visual representations are important for physical-world perception, but existing visual pretraining methods often capture semantic categories without preserving the identity and coherence of individual instances. We present a biologically inspired framework that learns object-centric representations for single images from raw videos. Our approach uses motion boundaries as a source of object-level grouping: off-the-shelf optical flow and clustering produce pseudo-instance masks, which supervise a single-image encoder with pixel-level pairwise metric learning. The framework requires neither human annotations nor camera calibration. We first obtain 195 million pseudo-labeled frames from 7,163 hours of driving and web videos, then expand the supervision to 421 million frames with Motion-Verified Self-Training, which combines model proposals with motion evidence. We train encoders up to Swin-H and distill the learned representations into a family of Swin backbones. Across monocular depth estimation, 3D object detection, 3D occupancy prediction, and end-to-end planning, the resulting models achieve competitive or superior performance relative to supervised and self-supervised pretraining baselines, with particularly strong transfer on geometry- and instance-sensitive tasks. These results show that motion-derived supervision can teach static image encoders to represent visual instances, providing a complementary direction for scalable visual pretraining.",
+      "authors": [
+        "Boshi Li",
+        "Xiaohui Wang",
+        "Xiaoyang Wu",
+        "Zhichao Li",
+        "Ya Yang",
+        "Naiyan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-03T18:11:53+00:00",
+      "link": "https://arxiv.org/pdf/2609.04348v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "learns object-centric representations preserving individual instance identity via pixel-level pairwise metric learning from raw videos",
+      "llm_evidence_cn": "通过像素级成对度量学习从原始视频学习保持个体实例身份的对象中心表示",
+      "llm_evidence": "通过像素级成对度量学习从原始视频学习保持个体实例身份的对象中心表示",
+      "canonical_evidence": "通过像素级成对度量学习从原始视频学习保持个体实例身份的对象中心表示",
+      "llm_tldr_en": "The paper proposes a biologically inspired framework that uses motion boundaries to generate pseudo-instance masks, supervising a single-image encoder with pixel-level pairwise metric learning to learn object-centric representations that preserve identity.",
+      "llm_tldr_cn": "针对现有视觉预训练方法往往只捕捉语义类别而丢失个体身份一致性的问题，提出一种受生物启发的框架，利用运动边界从原始视频中生成伪实例掩码，并通过像素级成对度量学习训练单图像编码器。该方法无需人工标注或相机标定，在大规模驾驶和网络视频上学习到保持对象身份与一致性的表示。这为无监督学习身份敏感表示提供了新思路，可迁移至行人重识别等任务。",
+      "llm_tldr": "针对现有视觉预训练方法往往只捕捉语义类别而丢失个体身份一致性的问题，提出一种受生物启发的框架，利用运动边界从原始视频中生成伪实例掩码，并通过像素级成对度量学习训练单图像编码器。该方法无需人工标注或相机标定，在大规模驾驶和网络视频上学习到保持对象身份与一致性的表示。这为无监督学习身份敏感表示提供了新思路，可迁移至行人重识别等任务。",
+      "llm_tags": [
+        "query:person-reid"
+      ],
+      "matched_query_tag": "query:person-reid",
+      "matched_query_text": "Learning robust appearance representations for pedestrian identity matching",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.06343v1",
+      "source": "arxiv",
+      "title": "Radiation, Rotation and Scale Invariant Feature Descriptor for Multimodal Image Matching",
+      "abstract": "Multimodal image matching is a fundamental task for multi-source information fusion. However, geometric distortions and nonlinear radiometric differences (NRD) severely limit performance, especially under radiometric, rotation, and scale variations. To address this issue, we propose a radiation, rotation, and scale invariant (RRSI) feature descriptor. First, a dual-head regional sampling (DHRS) module simultaneously performs Cartesian and Log-Polar sampling on keypoint neighborhoods, retaining spatial structural properties while enhancing robustness to rotation and scale variations. We then jointly encode geometric and radiometric relations between multimodal images in a unified deep feature space, enabling feature encoding, interaction, and fusion across intra-modal, dual-head sampled, and inter-modal regions. Furthermore, we introduce a bidirectional cross-modal generative reconstruction constraint during training. By decoding implicit features into structural patches of the counterpart modality, this mechanism anchors modality-invariant geometric topologies without additional inference overhead. Experiments on optical-infrared and optical-SAR datasets demonstrate highly competitive matching performance and strong robustness to rotation and scale variations. RRSI supports the full rotation range from 0 to 360 degrees and scale factors up to four. Its generalization ability is further validated on multimodal images from computer vision, remote sensing, and medical imaging. The implementation will be made publicly available at https://github.com/yeyuanxin110/RRSI .",
+      "authors": [
+        "Yuanxin Ye",
+        "Tengfeng Tang",
+        "Tao Peng",
+        "Zhiqiang Han",
+        "Jiayuan Li",
+        "Mi Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-06T02:32:03+00:00",
+      "link": "https://arxiv.org/pdf/2609.06343v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes a radiation, rotation and scale invariant feature descriptor for multimodal image matching, jointly encoding geometric and radiometric relations",
+      "llm_evidence_cn": "提出用于多模态图像匹配的辐射、旋转和尺度不变特征描述子，联合编码几何与辐射关系",
+      "llm_evidence": "提出用于多模态图像匹配的辐射、旋转和尺度不变特征描述子，联合编码几何与辐射关系",
+      "canonical_evidence": "提出用于多模态图像匹配的辐射、旋转和尺度不变特征描述子，联合编码几何与辐射关系",
+      "llm_tldr_en": "The paper addresses multimodal image matching challenges from geometric distortions and radiometric differences by proposing an RRSI feature descriptor with dual-head regional sampling and joint encoding, improving robustness across modalities.",
+      "llm_tldr_cn": "针对多模态图像匹配中几何畸变与非线性辐射差异导致的性能下降问题，提出一种辐射、旋转和尺度不变（RRSI）特征描述子。该描述子采用双头区域采样模块同时进行笛卡尔和对数极坐标采样，并在统一深度特征空间中联合编码多模态图像间的几何与辐射关系。实验表明该方法在辐射、旋转和尺度变化下显著提升了匹配性能，为跨模态图像匹配提供了新的解决方案。",
+      "llm_tldr": "针对多模态图像匹配中几何畸变与非线性辐射差异导致的性能下降问题，提出一种辐射、旋转和尺度不变（RRSI）特征描述子。该描述子采用双头区域采样模块同时进行笛卡尔和对数极坐标采样，并在统一深度特征空间中联合编码多模态图像间的几何与辐射关系。实验表明该方法在辐射、旋转和尺度变化下显著提升了匹配性能，为跨模态图像匹配提供了新的解决方案。",
+      "llm_tags": [
+        "query:vi-reid"
+      ],
+      "matched_query_tag": "query:vi-reid",
+      "matched_query_text": "aligning feature distributions across heterogeneous modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
