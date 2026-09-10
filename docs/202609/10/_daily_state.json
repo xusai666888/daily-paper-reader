@@ -1,0 +1,25 @@
+{
+  "date": "20260910",
+  "date_label": "",
+  "generated_at": "2026-09-10 21:18:33 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.10303v1",
+      "route": "202609/10/2609.10303v1-synthermface-amplifying-limited-paired-data-for-visible-thermal-face-recognition-via-synthetic-data-generation",
+      "title": "SynThermFace: Amplifying Limited Paired Data for Visible-Thermal Face Recognition via Synthetic Data Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过合成配对数据生成的可见光-热红外人脸识别",
+      "first_seen_at": "2026-09-10 21:18:33 UTC",
+      "updated_at": "2026-09-10 21:18:33 UTC"
+    }
+  ]
+}

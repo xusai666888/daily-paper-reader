@@ -1,0 +1,56 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-10T21:16:57.083399+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 1,
+    "quick_skim_target": 12,
+    "quick_selected": 1
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.10303v1",
+      "source": "arxiv",
+      "title": "SynThermFace: Amplifying Limited Paired Data for Visible-Thermal Face Recognition via Synthetic Data Generation",
+      "abstract": "Face recognition (FR) is a widely used modality for biometric authentication, but conventional models rely on visible-spectrum imagery and degrade when high-quality RGB images cannot be captured. Cross-spectral face recognition addresses this limitation by matching visible images with other modalities such as thermal imagery, enabling more reliable performance in low-light, nighttime, and unconstrained conditions. However, progress is limited by the scarcity of paired visible-thermal data, which is difficult and costly to collect at scale. We propose SynThermFace, a framework that amplifies limited real visible-thermal supervision into larger paired adaptation datasets for cross-spectral face recognition. A diffusion model is first adapted using a limited set of paired visible--thermal images and then used to generate large-scale paired visible--synthetic thermal data from existing real or synthetic visible face datasets. The generated pairs are used to adapt a pretrained visible-spectrum face recognition model into a CFR model. Unlike synthesis-based approaches that require image translation at test time, the proposed method shifts generation to the training stage and performs inference with a single forward pass through the adapted recognition model. Under the same MCXFace real-pair protocol, PACT improves over the evaluated CFR adaptation baselines, isolating the effect of the proposed adaptation objective. Training PACT on larger generated paired datasets provides additional improvements over both the unadapted model and the real-pair PACT configuration. Cross-database evaluation on the Tufts dataset provides evidence that the learned representation transfers to an unseen database. The source code and trained models will be made publicly available.",
+      "authors": [
+        "Anjith George",
+        "Adam Unal",
+        "Sebastien Marcel"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-09T15:15:04+00:00",
+      "link": "https://arxiv.org/pdf/2609.10303v1",
+      "tags": [
+        "keyword:VI-ReID",
+        "keyword:person-reid",
+        "query:VI-ReID",
+        "query:person-reid"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Visible-thermal face recognition via synthetic paired data generation",
+      "llm_evidence_cn": "通过合成配对数据生成的可见光-热红外人脸识别",
+      "llm_evidence": "通过合成配对数据生成的可见光-热红外人脸识别",
+      "canonical_evidence": "通过合成配对数据生成的可见光-热红外人脸识别",
+      "llm_tldr_en": "Addresses scarcity of paired visible-thermal data for cross-spectral face recognition by proposing SynThermFace, which amplifies limited real supervision into larger paired adaptation datasets via synthetic data generation, improving low-light and nighttime recognition.",
+      "llm_tldr_cn": "针对可见光-热红外人脸识别中配对数据稀缺且难以大规模采集的问题，本文提出SynThermFace框架，通过合成数据生成将有限的真实可见光-热红外配对监督扩增为更大的配对适应数据集。该方法旨在提升低光照、夜间等非受限条件下的跨光谱人脸识别性能，缓解数据不足的瓶颈。实验表明，所生成的数据能有效增强跨光谱人脸识别模型，该框架对可见光-红外行人重识别等跨模态身份匹配任务也具有参考价值。",
+      "llm_tldr": "针对可见光-热红外人脸识别中配对数据稀缺且难以大规模采集的问题，本文提出SynThermFace框架，通过合成数据生成将有限的真实可见光-热红外配对监督扩增为更大的配对适应数据集。该方法旨在提升低光照、夜间等非受限条件下的跨光谱人脸识别性能，缓解数据不足的瓶颈。实验表明，所生成的数据能有效增强跨光谱人脸识别模型，该框架对可见光-红外行人重识别等跨模态身份匹配任务也具有参考价值。",
+      "llm_tags": [
+        "query:vi-reid"
+      ],
+      "matched_query_tag": "query:vi-reid",
+      "matched_query_text": "matching identities across different sensing modalities",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 1 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 21:33:01 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 21:18:33 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,9 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 5 篇推荐（精读 0 篇，速读 5 篇）</p>
-<p>速读：《Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection》（7.0/10）, 《CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer》（6.0/10）, 《Aggregating Neighbor Embedding Projection and Rank-Based Manifold Learning for Image Retrieval》（6.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日速读《SynThermFace》，看它如何用合成数据为可见光-热红外人脸识别补上稀缺的配对样本。</p>
+<p>值得关注方向：通过合成数据生成放大有限配对数据，缓解跨模态人脸识别训练难。</p>
+<p>下步建议：留意该思路在真实热红外场景下的泛化表现与落地成本。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -93,12 +93,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection">Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer">CoViT: Instance-Correspondence Contrastive Learning for Vision Transformer</span></li><li><span class="dpr-home-dashboard-paper-title" title="Aggregating Neighbor Embedding Projection and Rank-Based Manifold Learning for Image Retrieval">Aggregating Neighbor Embedding Projection and Rank-Based Manifold Learning for Image Retrieval</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SynThermFace: Amplifying Limited Paired Data for Visible-Thermal Face Recognition via Synthetic Data Generation">SynThermFace: Amplifying Limited Paired Data for Visible-Thermal Face Recognition via Synthetic Data Generation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">person-reid <strong>3</strong></span><span class="dpr-home-dashboard-tag">vi-reid <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">vi-reid <strong>1</strong></span></div>
 </section>
 </div>
 

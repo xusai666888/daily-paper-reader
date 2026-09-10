@@ -1,0 +1,24 @@
+{
+  "label": "2026-09-10",
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T21:18:43",
+  "count": 1,
+  "papers": [
+    {
+      "paper_id": "202609/10/2609.10303v1-synthermface-amplifying-limited-paired-data-for-visible-thermal-face-recognition-via-synthetic-data-generation",
+      "section": "quick",
+      "title_en": "SynThermFace: Amplifying Limited Paired Data for Visible-Thermal Face Recognition via Synthetic Data Generation",
+      "authors": "Anjith George, Adam Unal, Sebastien Marcel",
+      "date": "2026-09-09",
+      "pdf": "https://arxiv.org/pdf/2609.10303v1",
+      "score": "6.0",
+      "evidence": "通过合成配对数据生成的可见光-热红外人脸识别",
+      "tldr": "可见光-热红外人脸识别受限于成对数据稀缺，难以大规模训练。SynThermFace 提出先微调扩散模型生成大规模成对合成热红外数据，再适配预训练可见光模型为跨光谱识别模型。在 MCXFace 协议下，PACT 适配方法超越基线，且更大生成数据带来额外提升。该方法将生成负担转移至训练阶段，推理仅需单次前向，并展示跨库迁移潜力。",
+      "tags": "query:vi-reid",
+      "abstract_en": "Face recognition (FR) is a widely used modality for biometric authentication, but conventional models rely on visible-spectrum imagery and degrade when high-quality RGB images cannot be captured. Cross-spectral face recognition addresses this limitation by matching visible images with other modalities such as thermal imagery, enabling more reliable performance in low-light, nighttime, and unconstrained conditions. However, progress is limited by the scarcity of paired visible-thermal data, which is difficult and costly to collect at scale. We propose SynThermFace, a framework that amplifies limited real visible-thermal supervision into larger paired adaptation datasets for cross-spectral face recognition. A diffusion model is first adapted using a limited set of paired visible--thermal images and then used to generate large-scale paired visible--synthetic thermal data from existing real or synthetic visible face datasets. The generated pairs are used to adapt a pretrained visible-spectrum face recognition model into a CFR model. Unlike synthesis-based approaches that require image translation at test time, the proposed method shifts generation to the training stage and performs inference with a single forward pass through the adapted recognition model. Under the same MCXFace real-pair protocol, PACT improves over the evaluated CFR adaptation baselines, isolating the effect of the proposed adaptation objective. Training PACT on larger generated paired datasets provides additional improvements over both the unadapted model and the real-pair PACT configuration. Cross-database evaluation on the Tufts dataset provides evidence that the learned representation transfers to an unseen database. The source code and trained models will be made publicly available.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
