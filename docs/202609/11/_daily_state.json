@@ -1,0 +1,41 @@
+{
+  "date": "20260911",
+  "date_label": "",
+  "generated_at": "2026-09-11 22:12:24 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.11514v1",
+      "route": "202609/11/2609.11514v1-prototype-matters-modality-unified-prototype-self-distillation-for-unsupervised-visible-infrared-person-re-identification",
+      "title": "Prototype Matters: Modality-unified Prototype Self-distillation for Unsupervised Visible-infrared Person Re-identification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "无监督可见光-红外行人重识别，模态统一原型",
+      "first_seen_at": "2026-09-11 22:12:24 UTC",
+      "updated_at": "2026-09-11 22:12:24 UTC"
+    },
+    {
+      "paper_id": "2609.11601v1",
+      "route": "202609/11/2609.11601v1-mmgait-benchmarking-and-unifying-gait-recognition-across-heterogeneous-modalities",
+      "title": "MMGait: Benchmarking and Unifying Gait Recognition across Heterogeneous Modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "可见光-红外跨模态步态识别",
+      "first_seen_at": "2026-09-11 22:12:24 UTC",
+      "updated_at": "2026-09-11 22:12:24 UTC"
+    }
+  ]
+}
