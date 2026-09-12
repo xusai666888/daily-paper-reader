@@ -1,0 +1,41 @@
+{
+  "date": "20260912",
+  "date_label": "",
+  "generated_at": "2026-09-12 21:31:05 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.09005v1",
+      "route": "202609/12/2609.09005v1-dxpr-depth-based-vision-lidar-cross-modal-place-recognition-using-vision-foundation-models",
+      "title": "DXPR: Depth-Based Vision-LiDAR Cross-Modal Place Recognition Using Vision Foundation Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "将相机和激光雷达转换为统一的深度图像表示，学习模态不变的全局描述符，用于跨模态地点识别。",
+      "first_seen_at": "2026-09-12 21:31:05 UTC",
+      "updated_at": "2026-09-12 21:31:05 UTC"
+    },
+    {
+      "paper_id": "2609.10224v1",
+      "route": "202609/12/2609.10224v1-uot-gap-a-variational-principle-for-the-modality-gap-in-vision-language-models-via-unbalanced-optimal-transport",
+      "title": "UOT-Gap: A Variational Principle for the Modality Gap in Vision-Language Models via Unbalanced Optimal Transport",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提出UOT-Gap，采用不平衡最优传输对图像和文本嵌入之间的模态差距进行建模和诊断。",
+      "first_seen_at": "2026-09-12 21:31:05 UTC",
+      "updated_at": "2026-09-12 21:31:05 UTC"
+    }
+  ]
+}
