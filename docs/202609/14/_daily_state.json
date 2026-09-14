@@ -1,0 +1,57 @@
+{
+  "date": "20260914",
+  "date_label": "",
+  "generated_at": "2026-09-14 22:34:18 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.12577v1",
+      "route": "202609/14/2609.12577v1-score-subdistribution-aware-collaborative-knowledge-reinforcing-for-cloth-hybrid-lifelong-person-re-identification",
+      "title": "SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "终身行人重识别，处理换装数据",
+      "first_seen_at": "2026-09-14 22:34:18 UTC",
+      "updated_at": "2026-09-14 22:34:18 UTC"
+    },
+    {
+      "paper_id": "2609.12497v1",
+      "route": "202609/14/2609.12497v1-roes-rotational-equivariant-selective-frequency-fusion-for-multimodal-images",
+      "title": "RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "红外-可见光图像的旋转等变选择性频率融合",
+      "first_seen_at": "2026-09-14 22:34:18 UTC",
+      "updated_at": "2026-09-14 22:34:18 UTC"
+    },
+    {
+      "paper_id": "2609.12622v1",
+      "route": "202609/14/2609.12622v1-ra-sod-reliability-aware-rgb-t-salient-object-detection-under-modality-degradation",
+      "title": "RA-SOD: Reliability-Aware RGB-T Salient Object Detection under Modality Degradation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "vi-reid"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向RGB-T显著目标检测的可靠性感知跨模态融合",
+      "first_seen_at": "2026-09-14 22:34:18 UTC",
+      "updated_at": "2026-09-14 22:34:18 UTC"
+    }
+  ]
+}

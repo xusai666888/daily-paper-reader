@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-14",
+  "date": "2026-09-14",
+  "generated_at": "2026-09-14T22:34:25",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/14/2609.12577v1-score-subdistribution-aware-collaborative-knowledge-reinforcing-for-cloth-hybrid-lifelong-person-re-identification",
+      "section": "deep",
+      "title_en": "SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification",
+      "authors": "Kunlun Xu, Liangyu Ma, Jiangmeng Li, Xin Tong, Xiaode Liu, Yufei Guo, Jiahuan Zhou",
+      "date": "2026-09-11",
+      "pdf": "https://arxiv.org/pdf/2609.12577v1",
+      "score": "9.0",
+      "evidence": "终身行人重识别，处理换装数据",
+      "tldr": "在服装混合的终身行人重识别中，衣物一致与衣物变化数据交替出现，导致相关知识冲突，灾难性遗忘显著加剧。为此，提出SCORE框架，显式建模身份内多样性以巩固不同知识。其核心包括自适应子分布建模，为每个身份分配分布子原型以捕获身份内多样性，提高知识兼容性；以及分布知识强化，通过协同对齐在新原型中保留旧知识。大量实验表明SCORE达到最先进性能，有效缓解了该场景下的遗忘问题。",
+      "tags": "query:person-reid",
+      "abstract_en": "Lifelong Person Re-Identification (LReID) aims to train a unified person retrieval model from a non-stationary data stream. Existing LReID methods mainly focus on scenarios where the clothing of each person is consistent. Recently, the Cloth-Hybrid LReID (CH-LReID) where cloth-consistent and cloth-changing data alternately occur, has emerged as a more practical and challenging scenario. Due to the conflict between clothing-relevant and clothing-irrelevant knowledge, the well-known catastrophic forgetting problem is significantly exacerbated in this task. To address this issue, we propose a SubDistribution-aware COllaborative Knowledge REinforcing (SCORE) framework, where our key idea is explicitly modeling the intra-identity diversity to continually consolidate distinct cloth-consistent and cloth-changing knowledge. Specifically, an Adaptive SubDistribution Modeling mechanism is developed, where a set of distributional subprototypes is assigned to each identity to capture the intra-identity diversity, improving the compatibility between cloth-consistent and cloth-changing knowledge. Then, a Distributional Knowledge Reinforcement scheme is introduced, where the knowledge of old distributional subprototypes is retained in the new ones by a collaborative aligning mechanism. Extensive experiments show that our SCORE achieves the state-of-the-art performance.   Our code is available at https://github.com/zhoujiahuan1991/ECCV2026-SCORE",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/14/2609.12497v1-roes-rotational-equivariant-selective-frequency-fusion-for-multimodal-images",
+      "section": "quick",
+      "title_en": "RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images",
+      "authors": "Jiabao Wang, Wenjian Liu, Yaoming Cai, Gengyu Zhang, Boyan Zhao, Zijia Zhang, Yao Ding, Xiaobo Liu",
+      "date": "2026-09-11",
+      "pdf": "https://arxiv.org/pdf/2609.12497v1",
+      "score": "7.0",
+      "evidence": "红外-可见光图像的旋转等变选择性频率融合",
+      "tldr": "红外-可见光融合依赖结构先验，但现有方法全域强制旋转等变，忽略低频共享结构需严格等变、高频模态细节需灵活处理。RoES提出旋转等变选择性频率融合网络，引入可训练旋转增强模块动态解耦高低频，采用旋转等变Mamba处理低频结构与极谱注意力Dual-Fourier块精化高频细节。实验表明其在融合质量和下游检测上均达最先进水平，有效协调频率选择性与等变约束。",
+      "tags": "query:vi-reid",
+      "abstract_en": "Infrared-visible image fusion facilitates robust multimodal perception by integrating complementary textural nuances from visible sensors with thermal signatures from infrared systems. Due to the task's inherently ill-posed nature, existing methods heavily rely on structural priors but typically enforce rotation equivariance uniformly across all features. Such a holistic approach overlooks a critical distinction where low-frequency shared structures strictly adhere to equivariant constraints while high-frequency modality-specific details require greater flexibility to preserve unique information. To bridge this gap, we propose RoES, a Rotational Equivariant Selective-frequency fusion network. Instead of employing static decomposition, we introduce a trainable rotation-enhanced updater/predictor module to dynamically decouple low- and high-frequency components. The resulting representations are then processed through a dual-branch fusion module tailored for spectral consistency. Specifically, a rotation-equivariant Mamba is employed to capture long-range structural dependencies in the low-frequency domain, while a polar spectral attention-based Dual-Fourier block refines high-frequency details under explicit low-frequency guidance. Extensive experiments demonstrate that RoES consistently achieves state-of-the-art performance in both fusion quality and downstream object detection, establishing a robust solution for multimodal fusion by reconciling frequency-selective features with equivariant constraints. The source code is available at https://github.com/BryceLosky/RoES-Fusion.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/14/2609.12622v1-ra-sod-reliability-aware-rgb-t-salient-object-detection-under-modality-degradation",
+      "section": "quick",
+      "title_en": "RA-SOD: Reliability-Aware RGB-T Salient Object Detection under Modality Degradation",
+      "authors": "Hongbo Gao, Zhengyu Li, Xueru Nie, Dihao Zhu, Lijun Zhao, Yunke Wang, Chang Xu",
+      "date": "2026-09-11",
+      "pdf": "https://arxiv.org/pdf/2609.12622v1",
+      "score": "6.0",
+      "evidence": "面向RGB-T显著目标检测的可靠性感知跨模态融合",
+      "tldr": "RGB-T 显著目标检测依赖可见光与热成像互补，但真实场景中两模态均会退化，产生不可靠证据并误导跨模态融合。为此提出 RA-SOD，显式建模模态可靠性，通过可靠性条件表示补偿退化特征，不确定性引导双流精修抑制不可靠信息，像素级模态竞争实现细粒度融合。在 VT821、VT1000、VT5000 和 VT-IMAG 四个基准上取得最优性能，并在严重模态退化下保持强鲁棒性，为多模态显著检测提供了可靠性感知的有效方案。",
+      "tags": "query:vi-reid",
+      "abstract_en": "RGB-Thermal (RGB-T) salient object detection leverages complementary cues from visible and thermal modalities to improve robustness in challenging environments. However, in real-world scenarios, the reliability of each modality is inherently unstable: RGB images degrade under low illumination, motion blur, and noise, while thermal imagery often suffers from contrast compression and sensor artifacts. Such degradation introduces unreliable perceptual evidence that can mislead cross-modal fusion and significantly deteriorate detection performance. To address this challenge, we propose RA-SOD, a reliability-aware RGB-T salient object detection framework that explicitly models modality reliability and integrates it into feature learning and cross-modal fusion. First, we introduce a reliability-conditioned representation that adaptively compensates degraded modality features while preserving structural cues. Second, an uncertainty-guided dual-stream refinement strategy progressively corrects cross-modal representations while suppressing unreliable evidence. Finally, we propose a pixel-wise modality competition mechanism that dynamically selects modality cues according to spatial reliability for fine-grained fusion. Extensive experiments on four benchmarks (VT821, VT1000, VT5000, and VT-IMAG) demonstrate that RA-SOD achieves state-of-the-art performance and exhibits strong robustness under severe modality degradation. Code and models are available at https://github.com/zaoxienian/RA-SOD.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

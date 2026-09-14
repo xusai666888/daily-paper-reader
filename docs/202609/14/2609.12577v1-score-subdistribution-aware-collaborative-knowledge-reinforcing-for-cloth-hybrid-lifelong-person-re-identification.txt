@@ -1,0 +1,654 @@
+Title: SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification
+
+URL Source: https://arxiv.org/pdf/2609.12577v1
+
+Published Time: Mon, 14 Sep 2026 00:58:21 GMT
+
+Number of Pages: 25
+
+Markdown Content:
+# SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification 
+
+Kunlun Xu 1 , Liangyu Ma 1 , Jiangmeng Li 2 , Xin Tong 3 , Xiaode Liu 3 ,Yufei Guo 3∗ , and Jiahuan Zhou 1∗ 
+
+> 1
+
+Wangxuan Institute of Computer Technology, Peking University, Beijing, China 
+
+{xkl,2300012949}@stu.pku.edu.cn , jiahuanzhou@pku.edu.cn  
+
+> 2
+
+University of Chinese Academy of Sciences, Beijing, China 
+
+jiangmeng2019@iscas.ac.cn  
+
+> 3
+
+Intelligent Science & Technology Academy of CASIC, Beijing 100041, China 
+
+{xin_tong,lxde,yfguo}@pku.edu.cn 
+
+Abstract. Lifelong Person Re-Identification (LReID) aims to train a unified person retrieval model from a non-stationary data stream. Ex-isting LReID methods mainly focus on scenarios where the clothing of each person is consistent. Recently, the Cloth-Hybrid LReID (CH-LReID) where cloth-consistent and cloth-changing data alternately oc-cur, has emerged as a more practical and challenging scenario. Due to the conflict between clothing-relevant and clothing-irrelevant knowledge, the well-known catastrophic forgetting problem is significantly exacerbated in this task. To address this issue, we propose a SubDistribution-aware 
+
+CO llaborative Knowledge RE inforcing (SCORE) framework, where our key idea is explicitly modeling the intra-identity diversity to continu-ally consolidate distinct cloth-consistent and cloth-changing knowledge. Specifically, an Adaptive SubDistribution Modeling mechanism is devel-oped, where a set of distributional subprototypes is assigned to each identity to capture the intra-identity diversity, improving the compati-bility between cloth-consistent and cloth-changing knowledge. Then, a Distributional Knowledge Reinforcement scheme is introduced, where the knowledge of old distributional subprototypes is retained in the new ones by a collaborative aligning mechanism. Extensive experiments show that our SCORE achieves the state-of-the-art performance. Our code is available at https://github.com/zhoujiahuan1991/ECCV2026-SCORE. 
+
+Keywords: Cloth-Hybrid Lifelong Person Re-Identification · SubDistri-bution Modeling · Knowledge Conflict 
+
+## 1 Introduction 
+
+Person Re-Identification (ReID) [6, 31] aims to match the same person across cameras. Traditional ReID methods focus on static scenarios with stationary  
+
+> *
+
+Corresponding authors: Yufei Guo, Jiahuan Zhou arXiv:2609.12577v1 [cs.CV] 11 Sep 2026 2 Kunlun Xu et al. 𝐷 𝑡 −1 𝐷 𝑡  𝐷 𝑡 +1 𝐷 𝑡 +2   
+
+> (a) Lifelong Person Re -Identification ( LReID )
+> (b) Cloth -Hybrid Lifelong Person Re -Identification (CH -LReID )
+> ID1
+> Cloth -Consistent
+> ID2
+> Cloth -Consistent
+> ID3
+> Cloth -Consistent
+> ID4
+> Cloth -Consistent
+> 𝐷 𝑡 −1𝐷 𝑡 𝐷 𝑡 +1𝐷 𝑡 +2
+> ID1
+> Cloth -Consistent
+> ID2
+> Cloth -Changing
+> ID3
+> Cloth -Consistent
+> ID4
+> Cloth -Changing
+
+…
+
+…
+
+…
+
+…
+
+Fig. 1: (a) Previous LReID methods primarily focus on the cloth-consistent lifelong person re-identification scenario. (b) This paper addresses a more practical and chal-lenging cloth-hybrid lifelong person re-identification problem where the cloth-consistent and cloth-changing training data occur alternatively. 
+
+cameras and environments [5,7,30,48]. Recently, Lifelong Person Re-Identification (LReID) [25, 37, 41, 55] has attracted increasing research interest by considering that non-stationary data arrives continually, where the catastrophic forgetting of past knowledge is the key challenge. However, existing LReID methods primarily consider that the clothing of each person is consistent [2, 13, 39, 43, 49], as shown in Fig. 1 (a). Since lifelong learning usually involves long-term data collection, changes in people’s clothing inevitably occur from time to time, leading to a practical Cloth-Hybrid LReID (CH-LReID) [3], as shown in Fig. 1 (b). In CH-LReID, the catastrophic forgetting problem is further exacerbated due to knowledge conflicts between training stages. As shown in Fig. 2 (a), at stage t − 1, the model learns from a cloth-consistent dataset, in which clothing cues help to identify people. However, when cloth-changing data is introduced at stage t, the inter-cloth matching constraints cause the model to forget the previously learned cloth-consistent knowledge. Later, at stage t + 1 , the model is trained again on cloth-consistent data, causing the overwriting of cloth-changing knowledge. In addition, the model’s performance on earlier domains remains limited because some old knowledge cannot be reproduced due to domain gaps across stages. This ongoing vanishment of cloth-consistent and cloth-changing knowledge results in severe performance degradation across all past domains. Although Cloth-Changing ReID methods [8,10,12] have been proposed in re-cent years, the issues in Fig. 2 (a) persist when they are combined with LReID ap-proaches. This is because these methods focus only on improving cloth-changing knowledge acquisition, without addressing the inherent knowledge conflict prob-lem. Moreover, most of them rely on auxiliary information such as clothing labels, gait features, or body shape contours during training. However, obtaining these auxiliary data requires substantial manual effort, which limits their practicality in the lifelong learning scenario, which typically requires efficiency. Title Suppressed Due to Excessive Length 3Cloth  Consistent                   
+
+> Cloth  Changing  Cloth  Changing
+> Cloth  Consistent
+> 𝑫 𝒕−𝟏 𝑫 𝒕−𝟏 𝑫 𝒕 𝑫 𝒕 𝑫 𝒕−𝟏 𝑫 𝒕+𝟏
+> Subprototype Center
+> Subdistribution
+> Identity Feature of Different clothes
+> Identity Feature Distribution
+> (c) Our Method in CH -LReID
+> Existing
+> Method (a) Existing Method in CH -LReID
+> (b) Performance Comparison in CH -LReID
+> Stage 𝒕 Stage 𝒕 − 𝟏 Stage 𝒕 + 𝟏
+> Existing Method Our Method
+> Stage 𝒕 Stage 𝒕 − 𝟏 Stage 𝒕 + 𝟏
+> Stage 𝒕 Stage 𝒕 − 𝟏 Stage 𝒕 + 𝟏
+
+Fig. 2: (a) Due to the optimization conflict between cloth-consistent and cloth-changing scenarios, the catastrophic forgetting problem emerges as a critical challenge in CH-LReID. (b)(c) We propose to explicitly model the intra-identity distribution diversity, improving the compatibility between the cloth-consistent and cloth-changing knowledge. Thereby, it significantly addresses the catastrophic forgetting problem . 
+
+To address these limitations, as shown in Fig. 2 (c), we propose to explic-itly model the intra-identity distribution diversity, thereby enabling the model to mine and store the cloth-consistent and cloth-changing knowledge simultane-ously. As a consequence, inter-stage knowledge conflict can be effectively allevi-ated, making the catastrophic forgetting problem largely mitigated (as shown in Fig. 2 (b)). To achieve this, we introduce a SubDistribution-aware CO llaborative Knowl-edge RE inforcing (SCORE) framework. Firstly, an Adaptive SubDistribution Modeling (ASD) mechanism is developed, where the learnable distributional subprototypes are introduced to model the intra-identity subdistributions. Then, three optimization paradigms, Prototype Separating, Instance Assembling, and Distribution Purifying, are introduced to guide the prototypes to capture inter-identity subdistributions. To mitigate the forgetting of abundant knowledge em-bedded in subdistributions from historical stages, a Distributional Knowledge Reinforcement (DKR) scheme is introduced to guide the new data distribution 4 Kunlun Xu et al. 
+
+modeling by exploiting historical subdistributions, where a novel subprototype-level knowledge transfer loss is proposed to achieve interactive subdistribution modeling. To better retain the knowledge within the cross-instance represen-tational relations, an Instance-oriented Structural Knowledge Retention (ISK) module is developed to further improve the overall anti-forgetting capacity. Ex-tensive experimental results on the CH-LReID benchmark demonstrate that our approach outperforms existing approaches by large margins. In summary, our contributions are threefold: (1) To address the cyclic knowledge conflict and amplified catastrophic forget-ting in CH-LReID, we propose a novel approach SCORE that explicitly models the intra-identity variations to enhance the compatibility of the cloth-consistent and cloth-changing knowledge. (2) An Adaptive SubDistribution Modeling mechanism is designed to au-tomatically capture intra-identity subdistributions without relying on auxiliary data. Besides, the Distributional Knowledge Reinforcement scheme is developed to utilize historical subdistributional knowledge to guide new subdistribution learning, effectively achieving knowledge integration. (3) Extensive experiments demonstrate the superiority of our proposed method in jointly consolidating the cloth-consistent and cloth-changing knowledge com-pared to the state-of-the-art approaches. 
+
+## 2 Related Work 
+
+2.1 Lifelong Person Re-identification 
+
+Lifelong Person Re-Identification (LReID) aims to learn from non-stationary data [18,25,29], where catastrophic forgetting [17,34,38] is the primary challenge. Existing LReID approaches can be divided into two streams. Data replay-based methods [37, 49] mitigate the forgetting of old knowledge by revisiting stored historical data during the learning of new domains. Although this method has achieved notable progress, growing concerns over data privacy [26,46] have drawn increasing attention to non-exemplar-based approaches. Knowledge distillation-based methods [26, 34, 40] reduce the discrepancy between old and new domains by enforcing output consistency. Some methods, e.g. , DKP [42], introduce iden-tity prototypes to reserve historical information. The above LReID methods typically focus on cloth-consistent scenarios where the cross-domain knowledge shares similar semantic clues [25, 43, 46]. However, when applied to cloth-hybrid settings where the cloth-consistent and cloth-changing data show up alternately, the knowledge conflict caused by semantic clue change across domains would further intensify the catastrophic forgetting issue [43]. 
+
+2.2 Cloth-changing Person Re-identification 
+
+Cloth-changing ReID is a challenging task where the diversity in clothing styles hinders the learning of robust knowledge. To address this issue, some methods Title Suppressed Due to Excessive Length 5
+
+focused on disentangling clothing features during inference. Specifically, [4, 47] leverage clothing labels to force the model to rely less on clothing information. Besides, [9, 21] employ a semantic segmentation model to mask clothing infor-mation and introduce a consistency constraint between the original image and the clothing-removed image during training. Alternatively, other methods utilize information from additional modalities to learn clothes-irrelevant features, e.g. ,gait information [14] and silhouette information [45]. However, their reliance on auxiliary information limits their application in practice. Recently, some meth-ods have made notable advancements without introducing auxiliary information. For example, methods [10, 22] employ data augmentation to diversify the col-ors and textures of clothing in the dataset, thereby reducing the association between identity and specific clothing. However, when faced with datasets that continuously come in a non-stationary manner, these methods suffer from catas-trophic forgetting, where previously learned knowledge is overwritten, leading to degraded overall performance on seen domains. 
+
+2.3 Distribution Learning 
+
+Existing distribution learning methods primarily focus on modeling data uncer-tainty to address out-of-distribution (OOD) data [20, 23, 50, 54]. In the LReID task, DKP [42] performs instance-level modeling for each sample and aggregates them into prototype distributions, improving the model’s ability to acquire new knowledge. In this paper, targeting the cloth-hybrid scenario, we model multiple subdistributions within each identity to capture diverse discriminative knowledge adaptively, where learnable subprototypes are introduced to model the subdistri-butions. By collaboratively utilizing the different subdistributions learned from both cloth-consistent and cloth-changing data across stages, we aim to reduce knowledge conflicts and alleviate catastrophic forgetting. 
+
+## 3 The Proposed Method 
+
+3.1 Preliminary 
+
+In CH-LReID, a stream of T cloth-hybrid training datasets D = {Dt}Tt=1 is pro-vided sequentially. Specifically, given a dataset Dt containing Nt identities, the included data may be either cloth-consistent or cloth-changing, but the specific type is unknown in advance. Besides, for each identity, it is also not known be-forehand whether they appear in multiple outfits. Furthermore, previously seen 
+
+t − 1 datasets are not accessible at the training stage t.
+
+3.2 Overview 
+
+As shown in Figure. 3, at the t-th training stage, given the new dataset Dt,we introduce k learnable subprototypes in the feature space for each identity, denoted as Pt = {(pti, y ti )}k×Nt 
+
+> i=1
+
+. Specifically, pti is a multi-dimensional Gaussian 6 Kunlun Xu et al. (c) Instance -oriented Structural 
+
+> Knowledge Retention
+> 𝒇 𝟏
+> 𝒕−𝟏
+> 𝒇 𝑩 𝒕−𝟏
+> ...
+
+𝓛 𝒔 
+
+SubPrototype 𝓟 𝒕−𝟏 𝒇 𝟏 𝒕 
+
+> 𝒇 𝑩 𝒕
+> ...
+
+𝓛 𝒓       
+
+> Prototype Separating
+> 𝓛 𝒑
+> (b) Distributional Knowledge Reinforcement
+> Instance
+> Feature
+> (a) Adaptive SubDistribution Modeling
+
+𝓖 𝒕−𝟏 
+
+> Feature Space
+
+𝓖 𝒕 
+
+# +
+
+> SubPrototype
+> Center
+> SubDistribution
+> boundaries
+
+𝐷 𝑡 −1 𝐷 𝑡  𝐷 𝑡 +1
+
+Stage 𝒕 − 𝟏  Stage 𝒕  Stage 𝒕 + 𝟏 
+
+> Distribution Purifying
+> 𝓛 𝒅
+> Instance Assembling
+> 𝓛 𝒂
+> ...
+> 𝒇 𝟏
+> 𝒕
+> 𝒇 𝟐 𝒕
+> 𝒇 𝑩 𝒕
+
+SubPrototype 𝓟 𝒕 
+
+> 𝓝(𝒄 𝒊 𝒕−𝟏 , (𝒗 𝒊 𝒕−𝟏 )𝟐 )
+> ...
+> 𝒈 1𝑡−1
+> 𝒈 2𝑡−1
+> 𝒈 𝑁 𝑠 𝑡−1
+> 𝑡−1
+> 𝒄 𝟏 𝒕−𝟏
+> 𝒄 𝟐 𝒕−𝟏
+> 𝒄 𝒌×𝑵 𝒕−𝟏
+> 𝒕−𝟏
+> 𝒗 𝟏 𝒕−𝟏
+> 𝒗 𝟐 𝒕−𝟏
+> 𝒗 𝒌×𝑵 𝒕−𝟏
+> 𝒕−𝟏
+> 𝒄 𝟏 𝒕
+> 𝒄 𝟐 𝒕
+> 𝒄 𝒌×𝑵 𝒕
+> 𝒕
+> 𝒗 𝟏 𝒕
+> 𝒗 𝟐 𝒕
+> 𝒗 𝒌×𝑵 𝒕
+> 𝒕
+> ...
+> ...
+> ...
+> 𝒈 1𝑡
+> 𝒈 𝑁 𝑠 𝑡
+> 𝑡
+> 𝓝(𝒄 𝒊 𝒕 , (𝒗 𝒊 𝒕 )𝟐 )
+
+...  
+
+> New Data 𝐷 𝑡
+
+# +
+
+𝓜 𝒕 
+
+𝓜 𝒕−𝟏  
+
+> 𝒙 𝟏
+> 𝒙 𝟐
+> 𝒙 𝟑
+> 𝒙 𝟒
+> SubDistribution Optimization
+
+𝑭 𝒕 
+
+> 𝒈 2𝑡
+> ...
+> ...
+> ...
+
+Fig. 3: The overview of our SCORE approach. (a) Adaptive SubDistribution Mod-eling (ASD) captures intra-identity diversity and encodes it into distributional sub-prototypes. (b) Distributional Knowledge Reinforcement (DKR) performs distribu-tional alignment to guide new distribution learning with historical distribution. (c) Instance-oriented Structural Knowledge Retention (ISK) integrates cross-instance re-lational knowledge across domains to improve the old knowledge consolidation. 
+
+distribution, and yti is its corresponding identity label. The center of pti is denoted as cti ∈ Rd, and vti ∈ Rd indicates the standard deviation vector derived from a diagonal covariance matrix Σti ∈ Rd×d of pti. Besides, we define Ct = {cti}k×Nt
+
+i=1 
+
+and Vt = {vti }k×Nt
+
+i=1 as the overall center set and standard deviation set at stage 
+
+t, respectively. The Adaptive SubDistribution Modeling (ASD) module aims to capture the intra-identity subdistributions via an adaptive distributional subprototype op-timization mechanism. Besides, the Distributional Knowledge Reinforcement (DKR) module utilizes the preserved historical distributional information to guide the new subdistribution learning. Furthermore, the Instance-oriented Struc-tural Knowledge Retention (ISK) module integrates fine-grained cross-instance relational knowledge from the previous stage into the new model to enhance the historical knowledge consolidation capacity. 
+
+3.3 Adaptive SubDistribution Modeling 
+
+Given a batch of input data {(xi, y i)}Bi=1 ∈ Dt, where B denotes the batch size, suppose there are n distinct identities in this batch, and let the corresponding identity label set be Y = {yi}ni=1 . The model backbone M t extracts visual features from the inputs, producing a set of feature representations F = {fi}Bi=1 .To enhance the discriminative capability of the model, we employ the cross-entropy loss Lce [43] and the triplet loss Ltri [34, 40] as the base supervision: Title Suppressed Due to Excessive Length 7
+
+
+
+Lce −s = −
+
+> B
+
+X
+
+> i=1
+
+yi log ρ(Wtfi)
+
+Ltri −s = log 
+
+
+
+1 + exp 
+
+
+
+˜fa − ˜fp
+
+> 22
+
+− ˜fa − ˜fn
+
+> 22
+
+ , (1) where Wt denotes the linear projection parameter to map the features to logits, 
+
+ρ represents the softmax function, ˜f is the L2-normalized version of the feature, and <a, p, n> is a triplet set. Therefore, the basic loss function Lbase in LReID is formulated as: 
+
+Lbase = Lce −s + Ltri −s. (2) In the following, we introduce the mechanism of subdistribution Optimiza-tion: 
+
+Prototype Separating: Prototype Separating aims to ensure the clustering of subprototypes of the same identity and separate the subprototypes of differ-ent identities. Specifically, for each input batch, we retrieve the corresponding prototypes based on Y, denoted as P∗ = {(pti, y ti )}k×ni=1 , where yti ∈ Y . To ensure the coherence and the distinction among prototypes of the same and different identities respectively, we apply the cross-entropy loss and the triplet loss to P∗,obtaining a prototype separating loss: 
+
+Lp = Lce −p + Ltri −p, (3) 
+
+Instance Assembling: Instance Assembling aims to assign each instance to a subprototype and encourage the instance feature to approach the corre-sponding prototype. Since different outfits of the same identity may vary signif-icantly in clothing style, color, and appearance cues, the knowledge encoded by each outfit can differ substantially. To capture this intra-identity diversity, each subprototype is modeled as a distribution, enabling different subprototypes to represent varying degrees of intra-identity variability. To measure how well an instance feature matches each subprototype, we compute the maximum likeli-hood of the instance feature under every subprototype. The resulting likelihood matrix M ∈ RB×kN t is formulated as: 
+
+Mi,j = 1(2 π)d/ 2|Σtj |1/2 exp 
+
+
+
+− 12 (fi − ctj )T (Σtj )−1(fi − ctj )
+
+
+
+. (4) 
+
+where i ∈ [1 , B ] and j ∈ [1 , kN t].Then, we pull each instance feature toward the most similar subprototype of the same identity. Accordingly, the instance assembling loss La is formulated as: 
+
+La = 1
+
+B
+
+> B
+
+X
+
+> i=1
+
+(fi − c∗ 
+
+> i
+
+)2, (5) where c∗ 
+
+> i
+
+denotes the center of the most similar subprototype that shares the same identity label with fi.8 Kunlun Xu et al. 
+
+Distribution Purifying: Distribution Purifying aims to ensure that each subdistribution exclusively models instances belonging to its corresponding iden-tity. To achieve this, we first obtain the likelihood of the most compatible sub-prototypes from the likelihood matrix M for each instance, denoted as m ∈ RB .A corresponding correctness indicator z ∈ { 0, 1}B is also obtained which reflects whether the matched subprototype shares the same identity label: 
+
+
+
+mi = max  
+
+> j
+
+Mi,j 
+
+zi = I(yi = yt  
+
+> arg max jMi,j
+
+)
+
+, (6) where I is an indicator function. Then, we design a distribution purifying loss 
+
+Ld which is computed as follows:           
+
+> Ld=−1
+> B
+> BX
+> i=1
+> [zilog( ρ(mi)) + (1 −zi) log(1 −ρ(mi))] .(7)
+
+Overall SubDistribution Optimization Loss: Prototype Separating, In-stance Assembling, and Distribution Purifying mechanisms are complementary to each other since they perform inter-prototype, instance-centric, and prototype-centric SubDistribution evolution, respectively. Therefore, we compute the over-all subdistribution optimization Loss as follows: 
+
+Lsub = Lp + La + Ld. (8) By incorporating the above constraints, our method encodes intra-identity dif-ferentiated knowledge in diverse subprototypes. Note that even for the cloth-consistent dataset, the subdistributions are applicable since all the distributions could be approximated as Gaussian mixtures [24]. 
+
+3.4 Distributional Knowledge Reinforcement 
+
+In this section, we propose a collaborative aligning mechanism, which lever-ages the accumulated discriminative knowledge from the previous stage to guide the new subdistribution learning, thereby improving the coexistence of cloth-consistent and cloth-changing knowledge. Specifically, as shown in Figure. 3, when training in the new t-th stage, we sample s subprototype features Gt−1 = {gt−1 
+
+> i
+
+}N t−1 
+
+> s
+> i=1
+
+from all subprototypes in the 
+
+Pt−1 based on the distribution N (ct−1 
+
+> i
+
+, (vt−1 
+
+> i
+
+)2), where N t−1 
+
+> s
+
+= s × k × Nt−1.It is worth noting that, compared to directly using the subprototype centers, sampling from subdistributions allows for better utilization of the abundant distributional knowledge learned by each subprototype. For the Pt that are currently adaptively learnable, we only select the subpro-totypes that can be correctly matched according to Equation. 6 and also sample s
+
+subprototype features Gt = {gti }N ts
+
+> i=1
+
+, where N ts = s × nc and nc denotes the num-ber of correctly matched subprototypes. This is because the correctly matched subprototypes reflect the information that can currently accurately describe the Title Suppressed Due to Excessive Length 9
+
+identity, whereas the incorrectly matched subprototypes indicate confusion and bias in the knowledge they represent. We convert Gt−1 and Gt into matrix forms Gt−1 ∈ RN t−1  
+
+> s×d
+
+and Gt ∈ RN ts ×d,respectively. Then, a knowledge shift matrix Ks ∈ RN ts ×N t−1 
+
+> s
+
+for the subproto-types is obtained by: 
+
+Ks = ρ  GtG⊤
+
+> t−1
+
+/λ 1
+
+ , (9) where the softmax function ρ is applied across each row, and λ1 serves as a temperature parameter to adjust the sharpness of the matrix values. To re-duce the knowledge conflict caused by cloth-consistent and cloth-changing data across different stages, we perform distillation on the knowledge shift matrix 
+
+Ks to collaboratively leverage both new and old knowledge. Accordingly, the subprototype-level knowledge transfer loss is defined as follows: 
+
+Lt = KL  ρ  KsK⊤ 
+
+> s
+
+/λ 2
+
+ ∥ ρ  GtG⊤ 
+
+> t
+
+/λ 2
+
+ , (10) where KL denotes the Kullback-Leibler (KL) divergence and λ2 is another tem-perature parameter. 
+
+3.5 Instance-oriented Structural Knowledge Retention 
+
+The DKR module facilitates the collaborative use of overall knowledge from both the new and old stages from the perspective of distributions. However, it lacks the integration of cross-instance fine-grained knowledge. To address this, inspired by the existing works [43], we propose an Instance-oriented Structural Knowledge Retention module. First, we use the old backbone ϕt−1(·), which was already trained in the t − 1 stage, to extract features from the current input batch, obtaining the representations in the old feature space denoted as 
+
+Fo ∈ RB×d. Then, to preserve fine-grained old knowledge, we maximize the structural consistency of the input between the new and old feature spaces as follows: 
+
+Ls = KL  ρ  FoF⊤ 
+
+> o
+
+/λ 2
+
+ ∥ ρ  FF ⊤/λ 2
+
+ , (11) where F ∈ RB×d is the matrix form of F. Note that ρ  FoF⊤ 
+
+> o
+
+/λ 2
+
+ and ρ  FF ⊤/λ 2
+
+
+
+both reflect the cross-instance representational relations, preserving the struc-tured knowledge in the feature space. By guiding the model to focus on this structural consistency, the consolidation of fine-grained knowledge is significantly improved. 
+
+3.6 Training and Inference 
+
+During training, the overall loss L for SCORE can be computed as follows: 
+
+L = Lbase + αLsub + β(Lt + Ls), (12) 10 Kunlun Xu et al. 
+
+where α and β are hyperparameters. Since both Lt and Ls involves old knowl-edge, they share the same weight for simplicity. After training at the t-th stage, we fuse the newly learned model M t with the old model M t−1 as a post-processing step following [42]: 
+
+M t ← M t + M t−1
+
+2 . (13) During the inference phase, only the backbone is exploited to extract image features for person retrieval. 
+
+## 4 Experiments 
+
+4.1 Datasets and Evaluation Protocol 
+
+Following previous works [3],we evaluate the effectiveness of our method on the CH-LReID benchmark [3], which consists of three cloth-consistent datasets (Market-1501 [53], MSMT17-V2 [36] and CUHK03 [19]), as well as two cloth-changing datasets (LTCC [28]and PRCC [45]). Following the previous works [3], we conduct training with two distinct dataset orders: (Order-1) Market → LTCC → PRCC → MSMT17 → CUHK03 and (Order-2) MSMT17 → PRCC → Market → CUHK03 → LTCC. Following previous works [3, 25, 42], we adopt Rank-1 accuracy (R@1) and mean Average Precision (mAP) as evaluation metrics. To comprehensively verify the model’s performance, both cloth-consistent and cloth-changing setting are evaluated. 
+
+4.2 Implementation Details 
+
+To ensure a fair comparison with existing methods [3,42,43], we adopt ResNet50 [11] as the backbone network. For both training orders, the first dataset is trained for 80 epochs, while each of the subsequent datasets is trained for 60 epochs. We use a mini-batch size of 128, constructed by sampling 32 identities with 4 images per identity. Each image is resized to 256×128 during training. The model is optimized using SGD with a learning rate of 0.008 and a weight decay of 0.0001. Additionally, the temperature parameters λ1and λ2 are set to 0.8. All experiments are conducted on a single NVIDIA 4090 GPU. 
+
+4.3 Comparison with State-Of-The-Art methods 
+
+We compare our proposed SCORE method against the current state-of-the-art CH-LReID method DKC [3]. Besides, we also compare with LReID methods, in-cluding LwF [15], AKA [25], PatchKD [34], LSTKC [43], USP [44], DKP [42] and DASK [39]. In addition, we incorporate the state-of-the-art cloth-changing ReID method DSIFLF [21], with the anti-forgetting strategy of LReID. The resulting model is named DSIFLF †. Moreover, we include both sequential finetuning and Title Suppressed Due to Excessive Length 11 
+
+Table 1: Performance comparison on Training Order-1: Market → LTCC → PRCC → MSMT17 → CUHK03. Method Cloth-Consistent Cloth-Changing Overall 
+
+Market LTCC PRCC MSMT17 CUHK03 Average LTCC PRCC Average Average 
+
+mAPR@1mAPR@1mAPR@1mAPR@1mAP R@1 mAPR@1mAPR@1mAPR@1mAPR@1mAPR@1 JointTrain 64.1 82.5 42.6 62.1 94.6 98.7 18.4 40.8 44.4 46.4 52.8 66.1 10.1 23.0 32.7 33.8 21.4 28.4 43.8 55.3 SFT 28.5 52.0 28.5 49.3 92.5 97.3 7.0 19.6 44.0 45.6 40.1 52.8 6.9 15.3 21.8 21.2 14.4 18.3 32.7 42.9 LwF [15] 44.5 65.8 21.6 40.0 87.4 91.3 4.0 11.6 25.5 25.0 36.6 46.7 5.9 12.5 25.9 26.7 15.9 19.6 30.7 39.0 AKA [25] 48.0 69.5 25.4 45.1 88.1 93.3 4.2 12.0 31.2 31.2 39.4 50.2 6.5 12.8 26.5 26.7 16.5 19.8 32.8 41.5 PatchKD [34] 68.0 85.5 30.8 54.7 93.5 96.5 5.7 15.6 33.2 32.9 46.2 57.0 7.2 17.9 26.1 26.0 16.7 22.0 37.8 47.0 LSTKC [43] 39.9 63.4 39.6 65.4 95.9 98.9 11.5 29.2 48.1 50.1 47.0 61.4 8.3 19.4 24.0 22.9 16.2 21.2 38.2 49.9 USP [44] 66.3 74.9 37.2 49.6 88.8 92.6 6.6 14.6 38.7 33.9 47.5 53.1 7.8 17.3 25.7 23.6 16.8 20.5 38.7 43.8 DKP [42] 51.3 73.0 44.2 68.6 98.4 99.4 13.5 31.6 39.5 40.6 49.4 62.6 9.3 21.4 35.5 34.8 22.4 28.1 41.7 52.8 DASK [39] 56.8 78.6 32.7 72.4 98.5 99.4 25.5 52.8 42.4 44.4 51.2 69.5 11.3 26.5 33.6 31.6 22.5 29.0 43.0 57.9 DSIFLF † [21] 47.5 69.2 42.1 65.5 97.0 97.8 11.0 26.4 39.7 41.6 47.5 60.1 8.9 17.9 34.0 31.7 21.5 24.8 40.0 50.0 DKC [3] 57.9 78.5 49.2 72.4 98.6 99.5 16.2 36.7 40.7 42.4 52.5 65.9 10.1 25.5 36.9 35.5 23.5 30.5 44.2 55.8 
+
+SCORE 63.1 82.9 58.2 78.4 98.7 99.5 23.5 50.2 44.0 45.2 57.5 71.2 11.0 25.8 36.2 36.4 23.6 31.1 47.8 59.7 Table 2: Performance comparison on Training Order-2: MSMT17 → PRCC → Market-1501 → CUHK03 → LTCC. Method Cloth-Consistent Cloth-Changing Overall 
+
+MSMT17 PRCC Market CUHK03 LTCC Average PRCC LTCC Average Average 
+
+mAPR@1mAPR@1mAPR@1mAPR@1mAPR@1mAPR@1 mAPR@1mAPR@1mAPR@1 mAPR@1 JointTrain 18.4 40.8 94.6 98.7 64.1 82.5 44.4 46.4 42.6 62.1 52.8 66.1 32.7 33.8 10.1 23.0 21.4 28.4 43.8 55.3 SFT 2.4 9.1 84.5 95.9 16.9 37.2 8.2 8.8 37.9 57.6 30.0 41.7 21.9 24.3 9.1 20.9 15.5 22.6 25.8 36.3 LwF [15] 12.7 28.8 91.3 95.5 25.2 49.0 8.6 8.0 41.9 63.3 35.9 48.9 27.9 28.3 8.7 18.4 18.3 23.4 30.9 41.6 AKA [25] 15.0 32.4 93.0 97.0 26.6 51.0 13.4 11.6 43.4 64.0 38.3 51.2 28.2 27.7 8.4 15.8 18.3 21.8 32.6 42.8 PatchKD [34] 22.6 47.9 95.0 98.5 38.2 64.2 21.8 23.1 45.8 70.0 44.7 60.7 28.1 27.6 9.3 21.7 18.7 24.7 37.3 50.4 LSTKC [43] 6.9 20.4 92.8 97.0 39.8 64.3 25.2 26.0 51.1 65.5 43.2 54.6 27.3 27.0 10.9 22.4 19.1 24.7 36.3 46.1 USP [44] 22.7 37.2 92.5 95.9 37.8 53.5 17.3 14.6 63.5 72.4 46.8 54.7 28.7 29.4 11.9 26.0 20.3 27.7 39.2 47.0 DKP [42] 11.8 29.0 96.7 98.8 46.0 69.8 29.9 30.9 55.8 75.8 48.0 60.9 34.1 34.6 11.6 24.2 22.9 29.4 40.8 51.9 DASK [39] 13.3 35.0 98.2 99.4 51.3 74.3 26.1 25.5 35.3 72.4 44.8 61.3 34.8 31.9 13.5 27.8 24.1 29.8 38.9 52.3 DSIFLF † [21] 8.6 22.4 96.7 97.2 50.0 71.4 25.8 25.7 57.4 74.8 47.7 58.3 32.8 30.3 12.8 23.2 22.8 26.8 40.6 49.3 DKC [3] 15.4 35.3 98.1 99.0 51.8 72.7 31.9 32.1 57.2 77.9 50.9 63.4 38.2 37.9 13.0 27.0 25.6 32.5 43.7 54.6 
+
+SCORE 19.9 44.5 98.9 99.5 55.3 77.3 34.5 35.1 65.0 81.1 54.7 67.5 36.5 35.4 14.4 32.7 25.4 34.0 46.4 57.9 
+
+joint training settings. The best and second-best results are highlighted in bold 
+
+and underline, respectively. 
+
+Compared on the Cloth-Consistent data : As shown in Table. 1 and Ta-ble. 2, our SCORE outperforms all existing methods under the Cloth-Consistent. Specifically, on Training Order-1, SCORE surpasses the state-of-the-art DASK and DKC with 5.0% and 1.7% Average mAP and R@1 improvements, respec-tively. Furthermore, on Training Order-2, SCORE outperforms the state-of-the-art DKC with 3.8%/4.1% Average mAP/R@1 improvements. These results demonstrate the effectiveness of our method in the CH-LReID scenario, where it can distinguish individuals by effectively integrating both clothing-related and clothing-irrelevant knowledge learned across different training stages, rather than suppressing the use of clothing information. These advantages arise from our SubDistribution-aware Collaborative Knowl-edge Reinforcing mechanism, which effectively alleviates the conflict between cloth-changing and cloth-consistent knowledge, thereby improving the cross-domain knowledge accumulation capacity. In contrast, existing LReID works, 12 Kunlun Xu et al.  
+
+> Fig. 4: Performance tendency at different training stages.
+
+e.g. , DASK, suffer from performance limitations as they discard clothing in-formation in the feature space for each identity, which inevitably hinders the effective use of valuable clothing-related cues. The existing CH-LReID method, DKC, though considered to estimate the subdistributions, only exploited the statistical distribution and neglected the dynamic modeling of subdistributions. Thus, it suffered from limited representation and utilization of inter-identity diversity. 
+
+Compared on the Cloth-Changing data : As shown in Table. 1, SCORE outperforms state-of-the-art DKC by 0.1%/0.6% under Average mAP/R1 on the Cloth-Changing data under Training-Order-1. Besides, under Training-Order-2, our SCORE surpasses DKC by 1.5% Average R@1 and obtains comparable performance on Average mAP. This indicates that, for cloth-changing data, our approach effectively captures and preserves the identity-specific differentiated knowledge introduced by variations in clothing. By collaboratively leveraging diverse discriminative knowledge, it mitigates the conflict induced by data type switching. 
+
+Compared on the Overall Performance : As shown in Table. 1 and Ta-ble. 2, our SCORE achieves state-of-the-art overall performance compared to the existing approaches. Specifically, SCORE outperforms the existing meth-ods by a minimal improvement of 3.6%/1.8% and 2.7%/3.3% under Training Order-1 and Training-Order-2, respectively. These results arise from the pro-posed SubDistribution-aware Collaborative Knowledge Reinforcing paradigm that effectively improves the compatibility between the Cloth-Changing and Cloth-Consistent knowledge. 
+
+Performance Tendency in Cloth-Hybrid Scenario : Figure.4 illustrates the overall performance tendency of different methods on seen domains. The re-sults show that our SCORE, although exhibiting comparable performance with existing methods, shows a consistent improvement over existing approaches. This highlights that our method is capable of consistent learning in cloth-hybrid sce-Title Suppressed Due to Excessive Length 13                                
+
+> Table 3: Ablation study of different components. Cloth-Consist. Cloth-Chang. Base ASD ISK DKR mAP R@1 mAP R@1
+> ✓40.1 52.8 14.4 18.3
+> ✓✓50.1 63.9 22.3 27.6
+> ✓✓✓52.8 66.3 23.0 29.6
+> ✓✓✓✓57.5 71.2 23.6 31.1
+
+narios, and achieves superior anti-forgetting performance by integrating diverse discriminative knowledge to alleviate knowledge conflicts. 
+
+4.4 Ablation Study Ablations on model components. As shown in Table. 3, we adopt Sequential Finetuning (SFT) as the baseline and incrementally incorporate the ASD, ISK, and DKR modules. When ASD is adopted, the model achieves 10.0%/11.1% 
+
+and 7.9%/9.3% improvements in mAP/R@1 on Cloth-Consistent and Cloth-Changing data, respectively. This improvement is attributed to the SubDistri-bution modeling mechanism, which enhances the compatibility between Cloth-Consistent and Cloth-Changing knowledge, thereby mitigating the catastrophic forgetting issue. Furthermore, as ISK is introduced, additional 2.7%/2.4% and 
+
+0.7%/2.0% improvements under mAP/R@1 metrics on Cloth-Consistent and Cloth-Changing data are achieved. This is because ISK transfers the inter-instance structure knowledge, which is complementary to the clothing knowl-edge. Finally, incorporating DKR yields additional gains of 4.7%/4.9% and 
+
+0.6%/1.5% , resulting in total improvements of 17.4%/18.4% and 9.2%/12.8% .These gains stem from explicitly leveraging historical distributions to guide new model learning, further alleviating conflicts between Cloth-Consistent and Cloth-Changing knowledge.     
+
+> Fig. 5: Ablation studies on feature sample number s.
+
+Note that the performance improvement of the Cloth-Changing data is less significant on the Cloth-Consistent data. This is because the Cloth-Changing scenario is inherently more challeng-ing, making performance gains more difficult to achieve. 
+
+Ablations on hyperparameters. We in-vestigate the influence of the hyperparameters 
+
+α, β, s, k , and present the results in Figure. 6 and Figure. 5. α and β are the loss weights to em-phasize the subdistribution modeling and histori-cal knowledge utilization, respectively. The proper 
+
+α and β can facilitate model learning, while too large values can lead to overfitting and limited robustness. Similarly, a proper predefined subdistribution number per class k and instance sample number s14 Kunlun Xu et al.          
+
+> (a) The weight of Lsub (b) The weight of Lt+Ls(c) SubDistribution per ID k
+
+Fig. 6: Ablation studies on hyperparameters under training Order-1. The default values are highlighted by the dashed lines. (a)  Comparsion  on MSMT17               
+
+> Cloth -Consistent Features of Different Identities Cloth -Changing Data Features of Different Identities
+> DKC SCORE (Ours)
+> (b) Comparsion on LTCC
+> DKC SCORE (Ours)
+
+Fig. 7: The t-SNE visualization of cloth-consistent and cloth-changing training data. 
+
+can promote model learning, while a too large k and s can cause optimization instability and overfitting. In this paper, we empirically set α, β, k, s to 0.75, 0.50, 5 and 1 by default. 
+
+4.5 Visualization Results 
+
+We visualize the features of Cloth-Consistent data (MSMT17) and Cloth-Changing data (LTCC) in comparison with the state-of-the-art DKC method, as shown in Figure. 7. The results indicate that our approach achieves better feature separa-tion across identities on both types of data. The results arise because DKC adopts unlearnable distributions, suffering from limited knowledge representation ca-pacity. In contrast, our SCORE model introduces an adaptive subdistribution learning and reinforcement paradigm, effectively enhancing the consolidation of Cloth-Consistent and Cloth-Changing knowledge. 
+
+## 5 Conclusion 
+
+In this paper, we focus on the challenging Cloth-Hybrid Lifelong Person Re-Identification (CH-LReID) task and introduce a novel SubDistribution-aware Title Suppressed Due to Excessive Length 15 
+
+COllaborative Knowledge REinforcing (SCORE) approach. To address the dete-riorated forgetting caused by the cloth-consistent and cloth-changing knowledge conflict, we propose to explicitly model the intra-identity diversity to improve the compatibility of both knowledge. To achieve this, an Adaptive SubDistribution Modeling mechanism is developed, where a set of distributional subprototypes is assigned to each identity to capture the intra-identity diversity. Besides, a Distri-butional Knowledge Reinforcement scheme is introduced, where the knowledge of old distributional subprototypes is retained in the new ones by a collabora-tive aligning mechanism. Extensive experiments demonstrate that our SCORE achieves the state-of-the-art performance. Our approach underscores the po-tential of automatic subdistribution modeling in improving conflict knowledge integration. 
+
+Acknowledgements : This work was a research achievement of National Engineering Research Center of New Electronic Publishing Technologies, and was supported by the National Natural Science Foundation of China (62376011, 62406313), the National Key R&D Program of China (2024YFA1410000), and the Postdoctoral Fellowship Program of China Postdoctoral Science Foundation, Grant No. YJB20250283. 
+
+## References 
+
+1. Asadi, N., Davari, M., Mudur, S., Aljundi, R., Belilovsky, E.: Prototype-sample relation distillation: towards replay-free continual learning. In: International con-ference on machine learning. pp. 1093–1106. PMLR (2023) 20, 21 2. Cui, Z., Peng, Y., Wang, X., Zhu, M., Zhou, J.: Continual vision-language retrieval via dynamic knowledge rectification. In: Proceedings of the AAAI Conference on Artificial Intelligence. vol. 38, pp. 11704–11712 (2024) 2, 20, 21 3. Cui, Z., Zhou, J., Peng, Y.: Dkc: Differentiated knowledge consolidation for cloth-hybrid lifelong person re-identification. In: Proceedings of the Computer Vision and Pattern Recognition Conference. pp. 3573–3582 (2025) 2, 10, 11, 23, 24 4. Cui, Z., Zhou, J., Peng, Y., Zhang, S., Wang, Y.: Dcr-reid: Deep component recon-struction for cloth-changing person re-identification. IEEE transactions on circuits and systems for video technology 33 (8), 4415–4428 (2023) 5 5. Gong, Y., Huang, L., Chen, L.: Person re-identification method based on color attack and joint defence. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 4313–4322 (2022) 2 6. Gong, Y., Zhong, Z., Qu, Y., Luo, Z., Ji, R., Jiang, M.: Cross-modality pertur-bation synergy attack for person re-identification. In: The Thirty-eighth Annual Conference on Neural Information Processing Systems 1 7. Gong, Y., Zhong, Z., Qu, Y., Luo, Z., Ji, R., Jiang, M.: Cross-modality perturbation synergy attack for person re-identification. NeurIPS 37 , 23352–23377 (2024) 2 8. Gu, X., Chang, H., Ma, B., Bai, S., Shan, S., Chen, X.: Clothes-changing person re-identification with rgb modality only. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 1060–1069 (2022) 2 9. Guo, P., Liu, H., Wu, J., Wang, G., Wang, T.: Semantic-aware consistency net-work for cloth-changing person re-identification. In: Proceedings of the 31st ACM international conference on multimedia. pp. 8730–8739 (2023) 5 16 Kunlun Xu et al. 10. Han, K., Gong, S., Huang, Y., Wang, L., Tan, T.: Clothing-change feature augmen-tation for person re-identification. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 22066–22075 (2023) 2, 5 11. He, K., Zhang, X., Ren, S., Sun, J.: Deep residual learning for image recognition. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 770–778 (2016) 10 12. Huang, Y., Wu, Q., Xu, J., Zhong, Y., Zhang, Z.: Clothing status awareness for long-term person re-identification. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 11895–11904 (2021) 2 13. Huang, Z., Zhang, Z., Lan, C., Zeng, W., Chu, P., You, Q., Wang, J., Liu, Z., Zha, Z.j.: Lifelong unsupervised domain adaptive person re-identification with coordi-nated anti-forgetting and adaptation. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 14288–14297 (2022) 2 14. Jin, X., He, T., Zheng, K., Yin, Z., Shen, X., Huang, Z., Feng, R., Huang, J., Chen, Z., Hua, X.S.: Cloth-changing person re-identification from a single image with gait prediction and regularization. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 14278–14287 (2022) 5 15. Li, D., Chen, X., Zhang, Z., Huang, K.: Learning deep context-aware features over body and latent parts for person re-identification. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 384–393 (2017) 10, 11, 20, 21 16. Li, Q., Peng, Y., Zhou, J.: Fcs: Feature calibration and separation for non-exemplar class incremental learning. In: Proceedings of the IEEE/CVF conference on com-puter vision and pattern recognition. pp. 28495–28504 (2024) 20, 21 17. Li, Q., Peng, Y., Zhou, J.: Progressive prototype evolving for dual-forgetting miti-gation in non-exemplar online continual learning. In: Proceedings of the 32nd ACM International Conference on Multimedia. pp. 2477–2486 (2024) 4 18. Li, Q., Xu, K., Peng, Y., Zhou, J.: Exemplar-free lifelong person re-identification via prompt-guided adaptive knowledge consolidation. International Journal of Com-puter Vision 132 (11), 4850–4865 (2024) 4 19. Li, W., Zhao, R., Xiao, T., Wang, X.: Deepreid: Deep filter pairing neural network for person re-identification. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 152–159 (2014) 10, 24 20. Li, Y., Duan, Y., Kuang, Z., Chen, Y., Zhang, W., Li, X.: Uncertainty estimation via response scaling for pseudo-mask noise mitigation in weakly-supervised seman-tic segmentation. In: Proceedings of the AAAI conference on artificial intelligence. vol. 36, pp. 1447–1455 (2022) 5 21. Li, Y., Cheng, D., Fang, C., Jiao, C., Wang, N., Gao, X.: Disentangling identity features from interference factors for cloth-changing person re-identification. In: Proceedings of the 32nd ACM International Conference on Multimedia. pp. 2252– 2261 (2024) 5, 10, 11 22. Liu, F., Ye, M., Du, B.: Cloth-aware augmentation for cloth-generalized person re-identification. In: Proceedings of the 32nd ACM International Conference on Multimedia. pp. 4053–4062 (2024) 5 23. Lu, F., Zhu, K., Zhai, W., Zheng, K., Cao, Y.: Uncertainty-aware optimal trans-port for semantically coherent out-of-distribution detection. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 3282–3291 (2023) 5 24. McLachlan, G.J., Rathnayake, S.: On the number of components in a gaussian mixture model. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Dis-covery 4(5), 341–355 (2014) 8 Title Suppressed Due to Excessive Length 17 25. Pu, N., Chen, W., Liu, Y., Bakker, E.M., Lew, M.S.: Lifelong person re-identification via adaptive knowledge accumulation. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 7901–7910 (2021) 2, 4, 10, 11, 20, 21 26. Pu, N., Liu, Y., Chen, W., Bakker, E.M., Lew, M.S.: Meta reconciliation nor-malization for lifelong person re-identification. In: Proceedings of the 30th ACM international conference on multimedia. pp. 541–549 (2022) 4 27. Pu, N., Zhong, Z., Sebe, N., Lew, M.S.: A memorizing and generalizing framework for lifelong person re-identification. IEEE Transactions on Pattern Analysis and Machine Intelligence 45 (11), 13567–13585 (2023) 20, 21 28. Qian, X., Wang, W., Zhang, L., Zhu, F., Fu, Y., Xiang, T., Jiang, Y.G., Xue, X.: Long-term cloth-changing person re-identification. In: Proceedings of the Asian conference on computer vision (2020) 10, 24 29. Shi, J., Yin, X., Chen, Y., Zhang, Y., Zhang, Z., Xie, Y., Qu, Y.: Multi-memory matching for unsupervised visible-infrared person re-identification. In: European Conference on Computer Vision. pp. 456–474. Springer (2024) 4 30. Shi, J., Yin, X., Zhang, Y., Xie, Y., Qu, Y., et al.: Learning commonality, divergence and variety for unsupervised visible-infrared person re-identification. Advances in Neural Information Processing Systems 37 , 99715–99734 (2024) 2 31. Shi, J., Zhang, Y., Yin, X., Xie, Y., Zhang, Z., Fan, J., Shi, Z., Qu, Y.: Dual pseudo-labels interactive self-training for semi-supervised visible-infrared person re-identification. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 11218–11228 (2023) 1 32. Shi, W., Ye, M.: Prototype reminiscence and augmented asymmetric knowledge aggregation for non-exemplar class-incremental learning. In: Proceedings of the IEEE/CVF international conference on computer vision. pp. 1772–1781 (2023) 20, 21 33. Siddiqui, N., Croitoru, F.A., Nayak, G.K., Ionescu, R.T., Shah, M.: Dlcr: A gener-ative data expansion framework via diffusion for clothes-changing person re-id. In: 2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV). pp. 1608–1617 (2025) 22 34. Sun, Z., Mu, Y.: Patch-based knowledge distillation for lifelong person re-identification. In: Proceedings of the 30th ACM International Conference on Mul-timedia. pp. 696–707 (2022) 4, 6, 10, 11, 20, 21 35. Tung, F., Mori, G.: Similarity-preserving knowledge distillation. In: Proceedings of the IEEE/CVF international conference on computer vision. pp. 1365–1374 (2019) 20, 21 36. Wei, L., Zhang, S., Gao, W., Tian, Q.: Person transfer gan to bridge domain gap for person re-identification. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 79–88 (2018) 10, 24 37. Wu, G., Gong, S.: Generalising without forgetting for lifelong person re-identification. In: Proceedings of the AAAI conference on artificial intelligence. vol. 35, pp. 2889–2897 (2021) 2, 4 38. Xu, K., Cheng, H., Li, J., Zou, X., Zhou, J.: Vision-language attribute disentangle-ment and reinforcement for lifelong person re-identification. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 40397– 40406 (2026) 4 39. Xu, K., Jiang, C., Xiong, P., Peng, Y., Zhou, J.: Dask: Distribution rehearsing via adaptive style kernel learning for exemplar-free lifelong person re-identification. In: Proceedings of the AAAI Conference on Artificial Intelligence. vol. 39, pp. 8915– 8923 (2025) 2, 10, 11 18 Kunlun Xu et al. 40. Xu, K., Zhang, H., Li, Y., Peng, Y., Zhou, J.: Mitigate catastrophic remembering via continual knowledge purification for noisy lifelong person re-identification. In: Proceedings of the 32nd ACM International Conference on Multimedia. pp. 5790– 5799 (2024) 4, 6 41. Xu, K., Zhuo, F., Li, J., Zou, X., Zhou, J.: Self-reinforcing prototype evolution with dual-knowledge cooperation for semi-supervised lifelong person re-identification. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 3564–3574 (2025) 2 42. Xu, K., Zou, X., Peng, Y., Zhou, J.: Distribution-aware knowledge prototyping for non-exemplar lifelong person re-identification. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 16604–16613 (2024) 4, 5, 10, 11, 20, 21 43. Xu, K., Zou, X., Zhou, J.: Lstkc: Long short-term knowledge consolidation for life-long person re-identification. In: Proceedings of the AAAI Conference on Artificial Intelligence. vol. 38, pp. 16202–16210 (2024) 2, 4, 6, 9, 10, 11, 20, 21 44. Yan, Y., Yu, H., Wang, Y., Song, S., Huang, W., Jin, J.: Unified stability and plasticity for lifelong person re-identification in cloth-changing and cloth-consistent scenarios. IEEE Transactions on Circuits and Systems for Video Technology (2024) 10, 11 45. Yang, Q., Wu, A., Zheng, W.S.: Person re-identification by contour sketch under moderate clothing change. IEEE transactions on pattern analysis and machine intelligence 43 (6), 2029–2046 (2019) 5, 10, 24 46. Yang, Z., Wu, D., Zhang, W., Li, B., Wang, W.: Handling label uncertainty for camera incremental person re-identification. In: Proceedings of the 31st ACM In-ternational Conference on Multimedia. pp. 6253–6263 (2023) 4 47. Yang, Z., Lin, M., Zhong, X., Wu, Y., Wang, Z.: Good is bad: Causality inspired cloth-debiasing for cloth-changing person re-identification. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 1472–1481 (2023) 5 48. Yin, X., Shi, J., Zhang, Y., Lu, Y., Zhang, Z., Xie, Y., Qu, Y.: Robust pseudo-label learning with neighbor relation for unsupervised visible-infrared person re-identification. In: Proceedings of the 32nd ACM International Conference on Mul-timedia. pp. 2242–2251 (2024) 2 49. Yu, C., Shi, Y., Liu, Z., Gao, S., Wang, J.: Lifelong person re-identification via knowledge refreshing and consolidation. In: Proceedings of the AAAI conference on artificial intelligence. vol. 37, pp. 3295–3303 (2023) 2, 4 50. Yu, T., Li, D., Yang, Y., Hospedales, T.M., Xiang, T.: Robust person re-identification by modelling feature uncertainty. In: Proceedings of the IEEE/CVF international conference on computer vision. pp. 552–561 (2019) 5 51. Zhang, J., Li, X., Wu, S., Xu, Y., Wang, Y.: Prior-free augmentation for cloth-changing person re-identification. In: Proceedings of the 33rd ACM International Conference on Multimedia. p. 10612–10621. MM ’25, Association for Computing Machinery, New York, NY, USA (2025) 22 52. Zhao, B., Tang, S., Chen, D., Bilen, H., Zhao, R.: Continual representation learning for biometric identification. In: Proceedings of the IEEE/CVF winter conference on applications of computer vision. pp. 1198–1208 (2021) 20, 21 53. Zheng, L., Shen, L., Tian, L., Wang, S., Wang, J., Tian, Q.: Scalable person re-identification: A benchmark. In: Proceedings of the IEEE international conference on computer vision. pp. 1116–1124 (2015) 10, 24 Title Suppressed Due to Excessive Length 19 54. Zheng, Z., Yang, Y.: Rectifying pseudo label learning via uncertainty estimation for domain adaptive semantic segmentation. International Journal of Computer Vision 129 (4), 1106–1120 (2021) 5 55. Zhou, J., Xu, K., Zhuo, F., Zou, X., Peng, Y.: Distribution-aware knowledge align-ing and prototyping for non-exemplar lifelong person re-identification. IEEE Trans-actions on Pattern Analysis and Machine Intelligence (2025) 2 Supplemental Materials 
+
+Kunlun Xu 1 , Liangyu Ma 1 , Jiangmeng Li 2 , Xin Tong 3 , Xiaode Liu 3 ,Yufei Guo 3∗ , and Jiahuan Zhou 1∗ 
+
+> 1
+
+Wangxuan Institute of Computer Technology, Peking University, Beijing, China 
+
+{xkl,2300012949}@stu.pku.edu.cn , jiahuanzhou@pku.edu.cn  
+
+> 2
+
+University of Chinese Academy of Sciences, Beijing, China 
+
+jiangmeng2019@iscas.ac.cn  
+
+> 3
+
+Intelligent Science & Technology Academy of CASIC, Beijing 100041, China 
+
+{xin_tong,lxde,yfguo}@pku.edu.cn 
+
+In the supplementary materials, we provide additional experimental results and detailed analyses to further support our main findings. Specifically, the sup-plementary materials include: 
+
+– More comprehensive comparisons of SCORE on the Cloth-Consistent LReID benchmark. 
+
+– Additional experimental comparison with the integration of Cloth-Changing ReID with LReID methods. 
+
+– Details of the relevant ReID datasets and their organization within the CH-LReID benchmark. 
+
+– Analysis of the parameter k which represents the subdistribution number. 
+
+– Analysis of computing and storage costs 
+
+– Analysis of forgetting measure and backward transfer. 
+
+– Additional qualitative results on feature distributions to illustrate the effec-tiveness of our method. 
+
+Table 1: Performance comparison on training order-1: Market-1501 → CUHK-SYSU →
+
+DukeMTMC → MSMT17 → CUHK03. Method Publication Market-1501 CUHK-SYSU DukeMTMC MSMT17 CUHK03 Seen-Avg Unseen-Avg 
+
+mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 Joint-Train - 75.3 90.1 84.5 86.0 66.9 81.6 31.6 57.1 58.5 61.4 63.4 75.2 55.2 48.2 CIL LwF [15] T-PAMI 2017 56.3 77.1 72.9 75.1 29.6 46.5 6.0 16.6 36.1 37.5 40.2 50.6 47.2 42.6 SPD [35] ICCV 2019 35.6 61.2 61.7 64.0 27.5 47.1 5.2 15.5 42.2 44.3 34.4 46.4 40.4 36.6 PRD [1] ICML 2023 7.3 18.0 33.5 35.6 3.7 7.6 0.8 2.4 33.8 33.8 15.8 19.5 23.0 17.7 PRAKA [32] ICCV 2023 37.4 61.3 69.3 71.8 35.4 55.0 10.7 27.2 54.0 55.6 41.3 54.2 47.7 41.6 FCS [16] CVPR 2024 58.3 78.5 75.1 76.2 42.6 59.8 10.2 24.3 35.3 34.9 44.3 54.7 52.1 44.2 LReID CRL [52] WACV 2021 58.0 78.2 72.5 75.1 28.3 45.2 6.0 15.8 37.4 39.8 40.5 50.8 47.8 43.5 AKA [25] CVPR 2021 58.1 77.4 72.5 74.8 28.7 45.2 6.1 16.2 38.7 40.4 40.8 50.8 47.6 42.6 PatchKD [34] ACM MM 2022 68.5 85.7 75.6 78.6 33.8 50.4 6.5 17.0 34.1 36.8 43.7 53.7 49.1 45.4 MEGE [27] T-PAMI 2023 39.0 61.6 73.3 76.6 16.9 30.3 4.6 13.4 36.4 37.1 34.0 43.8 47.7 44.0 LSTKC [43] AAAI 2024 54.7 76.0 81.1 83.4 49.4 66.2 20.0 43.2 44.7 46.5 50.0 63.1 57.0 49.9 C2R [2] CVPR 2024 69.0 86.8 76.7 79.5 33.2 48.6 6.6 17.4 35.6 36.2 44.2 53.7 48.7 41.9 DKP [42] CVPR 2024 60.3 80.6 83.6 85.4 51.6 68.4 19.7 41.8 43.6 44.2 51.8 64.1 59.2 51.6 
+
+SCORE This Paper 65.7 85.1 81.3 83.2 55.2 72.5 24.7 51.1 44.3 44.1 54.3 67.2 63.4 56.5 Supplemental Materials 21 
+
+Table 2: Performance comparison on training order-2: DukeMTMC →
+
+MSMT17 →Market-1501 → CUHK-SYSU → CUHK03. Method Publication DukeMTMC MSMT17 Market-1501 CUHK-SYSU CUHK03 Seen-Avg Unseen-Avg                                                                                                                                                                                                                   
+
+> mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 mAP R@1 Joint-Train -66.9 81.6 31.6 57.1 75.3 90.1 84.5 86.0 58.5 61.4 63.4 75.2 55.2 48.2 CIL LwF [15] T-PAMI 2017 42.7 61.7 5.1 14.3 34.4 58.6 69.9 73.0 34.1 34.1 37.2 48.4 44.0 40.1 SPD [35] ICCV 2019 28.5 48.5 3.7 11.5 32.3 57.4 62.1 65.0 43.0 45.2 33.9 45.5 39.8 36.3 PRD [1] ICML 2023 3.6 8.2 0.6 1.8 8.9 22.3 34.6 36.1 35.4 35.3 16.6 20.7 20.7 15.0 PRAKA [32] ICCV 2023 31.2 48.7 6.6 19.1 47.8 69.8 70.4 73.0 54.9 56.6 42.2 53.4 48.4 41.1 FCS [16] CVPR 2024 53.6 70.0 9.5 23.5 48.7 69.9 76.2 78.2 37.1 38.4 45.0 56.0 52.7 45.1 LReID  CRL [52] WACV 2021 43.5 63.1 4.8 13.7 35.0 59.8 70.0 72.8 34.5 36.8 37.6 49.2 45.3 41.4 AKA [25] CVPR 2021 42.2 60.1 5.4 15.1 37.2 59.8 71.2 73.9 36.9 37.9 38.6 49.4 46.0 41.7 PatchKD [34] ACM MM 2022 58.3 74.1 6.4 17.4 43.2 67.4 74.5 76.9 33.7 34.8 43.2 54.1 48.6 44.1 MEGE [27] T-PAMI 2023 21.6 35.5 3.0 9.3 25.0 49.8 69.9 73.1 34.7 35.1 30.8 40.6 44.3 41.1 LSTKC [43] AAAI 2024 49.9 67.6 14.6 34.0 55.1 76.7 82.3 83.8 46.3 48.1 49.6 62.1 57.6 49.6 C2R [2] CVPR 2024 59.7 75.0 7.3 19.2 42.4 66.5 76.0 77.8 37.8 39.3 44.7 55.6 48.5 41.7 DKP [42] CVPR 2024 53.4 70.5 14.5 33.3 60.6 81.0 83.0 84.9 45.0 46.1 51.3 63.2 59.0 51.6
+> SCORE This Paper 59.8 76.0 22.4 48.3 63.8 82.8 82.0 83.1 44.8 46.0 54.6 67.3 62.2 54.4
+
+## 1 Experimental Results on Cloth-Consistent LReID Benchmarks 
+
+We follow the experimental setup of previous Cloth-Consistent LReID works [2, 42, 43], adopting two training orders: Training Order-1: Market-1501 → CUHK-SYSU → DukeMTMC → MSMT17 → CUHK03, and Training Order-2: DukeMTMC →
+
+MSMT17 → Market-1501 → CUHK-SYSU → CUHK03. As shown in Table. 1 and Table. 2, our proposed SCORE method achieves competitive performance com-pared to existing approaches. Specifically, SCORE achieves an average mAP/R@1 of 54.3%/67.2% on the seen datasets under training Order-1, and 54.6%/67.3% 
+
+under training Order-2. These consistent results across different training se-quences demonstrate the robustness of SCORE in retaining previously learned identity-discriminative information. The performance indicates that SCORE not only captures fine-grained intra-identity variations but also facilitates collabora-tive knowledge retention at both the distributional and instance levels. By align-ing new and historical subdistributions while preserving instance-level structural relations, SCORE effectively mitigates the effects of catastrophic forgetting and maintains identity consistency throughout continual learning stages. In addition, on the unseen datasets from training Order-1 and Order-2, SCORE achieves an average mAP/R@1 of 63.4%/56.5% and 62.2%/54.4% ,respectively. These results highlight the strong generalization ability of our method when applied to previously unseen domains. Such performance gains can be attributed to SCORE’s capacity to model intra-identity variations via learn-able distributional subprototypes. By explicitly capturing the underlying sub-distributions within each identity, SCORE enables the model to leverage di-verse and complementary knowledge representations, rather than overfitting to appearance-specific cues. This facilitates fine-grained person discrimination even under distribution shifts and novel clothing conditions, making the model more robust in real-world, open-set deployment scenarios. 22 Kunlun Xu et al.       
+
+> Table 3: Comparison with the integration of cloth-changing and LReID methods. Method DASK+DLCR DASK+PFAC Ours
+> Average mAP/R@1 35.4/50.1 40.3/55.4 47.8 /59.7
+
+## 2 Additional Comparison with Integrating Cloth-Changing ReID with LReID Methods 
+
+To empirically validate whether simply combining state-of-the-art cloth-changing ReID techniques with lifelong ReID (LReID) frameworks can effectively miti-gate knowledge conflicts in hybrid streams, we integrated the leading LReID method, DASK, with two representative cloth-changing approaches: DLCR [33] and PFAC [51]. Both DLCR and PFAC focus on learning clothing-irrelevant features primarily through data augmentation. As detailed in Table 3, our pro-posed SCORE method significantly outperforms these hybrid baselines. Specifi-cally, SCORE achieves average mAP/R@1 improvements of 12.4%/9.6% over DASK+DLCR and 7.5%/4.3% over DASK+PFAC. These substantial gains underscore that SCORE’s adaptive subdistribution modeling not only captures intra-identity diversity more effectively but also successfully reconciles the con-flicting objectives of cloth-consistent and cloth-changing knowledge, thereby de-livering superior compatibility and overall performance. 
+
+## 3 Analysis of Parameter k
+
+To address concerns regarding the fixed number of subprototypes per identity, we conducted an empirical investigation into a dynamic variant that automatically adjusts the number of subdistributions by adding or removing them upon de-tecting feature outliers. However, as reported in Table 4, this dynamic k strategy leads to a slight performance degradation of 0.6%/1.0% in average mAP/R@1 compared to our fixed-k setting. We attribute this decline to optimization instability induced by frequent structural changes in the subdistribution space during training. In contrast, fix-ing k (set to 5) achieves a superior trade-off between modeling flexibility and training stability. These results empirically validate the rationality of our design choice.         
+
+> Table 4: Comparison between dynamic and fixed number of subprototypes. Method dynamic kfixed k(Ours)
+> Average mAP/R@1 47.2/58.7 47.8 /59.7 Supplemental Materials 23
+
+## 4 Analysis of Forgetting Measure and Backward Transfer 
+
+To further quantify forgetting behaviors using direct metrics, we evaluated Back-ward Transfer (BWT) and Forgetting Measure (FM) on both mAP and R@1, benchmarking our approach against the recent state-of-the-art method, DKC [3]. The results demonstrate that SCORE significantly surpasses DKC, achieving improvements of 4.8/2.3 in BWT and 5.6/3.2 in FM (mAP/R@1). These higher scores indicate substantially reduced negative backward transfer and min-imized forgetting of previously acquired knowledge. We attribute these gains to SCORE’s adaptive subdistribution modeling mechanism, which explicitly miti-gates inter-domain knowledge conflicts by preserving distinct appearance modes for each identity and reinforcing distributional consistency across learning stages. The consistent superiority across both metrics confirms SCORE’s effectiveness in maintaining long-term knowledge retention while seamlessly adapting to new domains.       
+
+> Table 5: Backward Transfer (BWT) and Forgetting Measure (FM) metrics in com-parison with SOTA DKC. Method DKC Ours
+> Average BWT(mAP)/BWT(R@1) -8.2/-4.0 -3.4 /-1.7
+> Average FM(mAP)/FM(R@1) 9.1/5.4 3.5 /2.2
+
+## 5 Anaylsis of Computing and Storage Costs 
+
+Although our method involves maintaining multiple sub-distribution parame-ters for each identity—along with operations such as stochastic sampling, shift matrix calculation, and relational matrix distillation—we conducted a compre-hensive evaluation of its computational and storage overhead. As demonstrated in Table 6, the sub-distribution parameters and their associated computations account for merely 4.7% and 6.0% of the total overhead, respectively. This marginal increase in GPU memory usage is attributed to the fact that sub-distribution modeling relies primarily on lightweight matrix operations that are decoupled from the heavy backbone network, thereby avoiding significant addi-tional memory consumption.                                     
+
+> Table 6: Computing and storage costs. GPU memory storage Subdistribution/Total 832.0MB/17892.3MB (4.7%) 6.0MB/100.2MB (6.0%) 24 Kunlun Xu et al.
+> Table 7: The statistics of datasets used in the CH-LReID benchmark. Type Datasets Name Original Identities CH-LReID Identities Train Query Gallery Train Query Gallery Cloth-Consistent Market-1501 [53] 751 750 751 500 751 751 MSMT17-V2 [36] 1041 3060 3060 500 3060 3060 CUHK03 [19] 767 700 700 500 700 700 Cloth-Changing LTCC [28] 77 75 75 77 75 75 PRCC [45] 150 71 71 150 71 71
+
+## 6 Dataset Details 
+
+The CH-LReID benchmark [3] is constructed upon existing LReID and CC-ReID settings and consists of seven datasets. It incorporates three widely used cloth-consistent datasets (Market-1501 [53], MSMT17-V2 (MSMT17) [36], and CUHK03 [19]) as well as two representative cloth-changing datasets (LTCC [28] and PRCC [45]). To alleviate data imbalance across datasets while maintaining sufficient iden-tity diversity, 500 identities are selected from each cloth-consistent dataset, whereas all training identities are retained for cloth-changing datasets. This configuration forms the standardized CH-LReID benchmark. As summarized in Table 7, the column “Original Identities” denotes the total number of identities in each dataset, while “CH-LReID Identities” indicates the subset of identities included in our benchmark. Furthermore, it is worth noting that our proposed method does not introduce ethical or regulatory concerns, because all experiments are conducted on the CH-LReID benchmark proposed in a prior CVPR 2024 study [3], and the datasets in the CH-LReID benchmark are publicly available and have been widely used in major conferences. Therefore, the data usage in this work complies with standard research norms. 
+
+## 7 More Visualization Results on Features 
+
+We visualize the features of different identities derived from both cloth-changing and cloth-consistent training data, as shown in Fig. 1. It is clearly observed that our SCORE method performs consistent learning across both cloth-consistent and cloth-changing data in the CH-LReID scenario. By collaboratively leveraging differentiated knowledge, SCORE effectively alleviates knowledge conflicts and mitigates catastrophic forgetting. Supplemental Materials 25 
+
+Fig. 1: The t-SNE visualization of cloth-consistent and cloth-changing training data.
