@@ -48,17 +48,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-14</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-15</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-14 22:34:18 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-15 22:37:35 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -69,10 +69,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 3 篇推荐（精读 1 篇，速读 2 篇）</p>
-<p>精读：《SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification》（9.0/10）</p>
-<p>速读：《RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images》（7.0/10）, 《RA-SOD: Reliability-Aware RGB-T Salient Object Detection under Modality Degradation》（6.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日精读一篇9分生成式AI多模态框架，主打低延迟多摄像头行人重识别；速读一篇7分生成式检索用于无监督文本行人搜索。</p>
+<p>最值得看的方向是：用生成式AI融合多模态特征来压缩跨摄像头识别延迟，以及用生成式检索提升无监督文本行人搜索效率。</p>
+<p>下步建议：读者可先看精读论文的“多模态低延迟”设计，再对照速读论文的生成式检索思路，评估能否迁移到自己的行人分析场景。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -84,7 +83,7 @@
     <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification">SCORE: SubDistribution-aware Collaborative Knowledge Reinforcing for Cloth-Hybrid Lifelong Person Re-Identification</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification">A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">person-reid <strong>1</strong></span></div>
 </section>
@@ -94,12 +93,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images">RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images</span></li><li><span class="dpr-home-dashboard-paper-title" title="RA-SOD: Reliability-Aware RGB-T Salient Object Detection under Modality Degradation">RA-SOD: Reliability-Aware RGB-T Salient Object Detection under Modality Degradation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Generative Retrieval for Unsupervised Text-Based Person Search">Generative Retrieval for Unsupervised Text-Based Person Search</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">vi-reid <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">person-reid <strong>1</strong></span></div>
 </section>
 </div>
 

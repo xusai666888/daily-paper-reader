@@ -1,0 +1,41 @@
+{
+  "date": "20260915",
+  "date_label": "",
+  "generated_at": "2026-09-15 22:37:35 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.14419v1",
+      "route": "202609/15/2609.14419v1-a-generative-ai-integrated-multimodal-framework-for-low-latency-multi-camera-person-re-identification",
+      "title": "A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多摄像头行人重识别框架",
+      "first_seen_at": "2026-09-15 22:37:35 UTC",
+      "updated_at": "2026-09-15 22:37:35 UTC"
+    },
+    {
+      "paper_id": "2609.12965v1",
+      "route": "202609/15/2609.12965v1-generative-retrieval-for-unsupervised-text-based-person-search",
+      "title": "Generative Retrieval for Unsupervised Text-Based Person Search",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "person-reid"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "无监督文本行人搜索，检索行人图像",
+      "first_seen_at": "2026-09-15 22:37:35 UTC",
+      "updated_at": "2026-09-15 22:37:35 UTC"
+    }
+  ]
+}
